@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_master/doquiz.dart';
 
 void main() {
   runApp(MyQuiz());
@@ -33,7 +34,7 @@ class _AllMyQuizs extends State<MyQuizs> {
             margin: EdgeInsets.all(150),
             child: ElevatedButton(
               child: Text('Jouer', style: TextStyle(fontSize: 20.0),),
-              onPressed: () {},
+              onPressed: () {startQuiz();},
             ),
           ),
           Container(
@@ -47,6 +48,12 @@ class _AllMyQuizs extends State<MyQuizs> {
         ))
 
     );
+  }
+
+  void startQuiz(){
+    setState(() {
+      Navigator.push(context, new MaterialPageRoute(builder: (context)=> new DoQuiz()));
+    });
   }
 }
 
