@@ -19,7 +19,6 @@ class MyQuizs extends StatefulWidget {
     return _AllMyQuizs();
 
   }
-
 }
 class _AllMyQuizs extends State<MyQuizs> {
 
