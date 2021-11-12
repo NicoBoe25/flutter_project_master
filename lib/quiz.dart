@@ -1,6 +1,6 @@
 import 'dart:collection';
 
-import 'package:flutter_project_master/Question.dart';
+import 'package:flutter_project_master/question.dart';
 
 class Quiz {
    int _id  ;
