@@ -12,6 +12,7 @@ class Quiz {
 
   Quiz.createQuiz( this._id , this._list_questions, this._name );
 
+
    int get id => _id;
    List<Question> get list_questions => _list_questions;
    String get name => _name;
@@ -40,6 +41,7 @@ class Quiz {
      _list_questions.insert(position, question) ;
    }
 
+
    void addAll(){
      _list_questions.add(new Question.createQuestion4Options("Amazone", "Le fleuve le plus long du monde", "Nil", "Amazone", "Gange", "Danube"));
      _list_questions.add(new Question.createQuestion4Options("Amazone", "Le fleuve le plus gros débit du monde", "Gange", "Amazone", "Mississipi", "Congo"));
@@ -48,5 +50,6 @@ class Quiz {
      _list_questions.add(new Question.createQuestion4Options("Pacifique", "L océan le plus grand du monde", "Indien", "Arctique", "Pacifique", "Atlantique"));
      _list_questions.add(new Question.createQuestion4Options("Franche-Comte", "La plus belle région de France", "Bretagne", "Franche-Comte", "Limousin", "Centre"));
    }
+
 
 }

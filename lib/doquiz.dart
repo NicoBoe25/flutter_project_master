@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/quiz.dart';
 
-class DoQuiz extends StatefulWidget{
+/*class DoQuiz extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
     return new letsDoQuizs();
   }
+
   Quiz quiz1 = new Quiz(1, "geoquiz");
   Quiz quiz2 = new Quiz(2, "geoquiz");
   Quiz quiz3 = new Quiz(3, "geoquiz");
@@ -95,7 +96,7 @@ class letsDoQuizs extends State<DoQuiz> {
 
 
 
-
+*/
 
 
 
