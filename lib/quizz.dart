@@ -7,7 +7,6 @@ class Quizz {
 
   Quizz(){
       this._addAll();
-
   }
   List<String> _list_quizes = List<String>.filled(0,"",growable: true) ;
 

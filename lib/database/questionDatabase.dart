@@ -14,7 +14,6 @@ class QuestionDatabase{
 
     _database = await _initDB('quiz.db');
     return _database!;
-
   }
 
 
@@ -47,7 +46,35 @@ class QuestionDatabase{
     ''');
   }
 
-  Future _close() async {
+  Future<Question> create(Question question) async {
+    final db = await instance.database;
+
+    final id = await db.insert(tableQuestions, question.toJson());
+
+    return question.copy(id: id);
+  }
+
+  Future<Question?> readQuestion(int idQuestion) async {
+    final db = await instance.database;
+
+    final maps = await db.query(
+        tableQuestions,
+        columns: QuestionFields.values,
+      where: '${QuestionFields.id} = ?',
+      whereArgs: [idQuestion],
+    );
+    if(maps.isNotEmpty){
+      return Question.fromJson(maps.first);
+    }
+    else{
+      throw Exception('ID $idQuestion not found');
+    }
+
+  }
+
+
+
+    Future _close() async {
     final db = await instance.database;
 
     db.close();

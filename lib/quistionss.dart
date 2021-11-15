@@ -1,6 +1,10 @@
 final String tableQuestions = 'questions';
 
 class QuestionFields{
+  static final List<String> values = [
+    id, name, reponse,question,option1,option2,option3,option4
+  ];
+
   static final String id = '_id';
   static final String name = '_name';
   static final String reponse = '_reponse';
@@ -10,6 +14,8 @@ class QuestionFields{
   static final String option3 = '_option3';
   static final String option4 = '_option4';
 }
+
+
 
 class Question{
   int _id;
@@ -24,8 +30,20 @@ class Question{
 
   Question(this._id, this._nameQuiz, this._reponse, this._question , this._option1 , this._option2 );
 
-  //Question.createQuestion2Options(this._reponse, this._question, this._option1, this._option2 , this._idQuiz);
-  //Question.createQuestion4Options(this._reponse, this._question, this._option1, this._option2,this._option3, this._option4 , this._idQuiz);
+  Question.createQuestion3Options(this._id, this._nameQuiz,this._reponse, this._question, this._option1, this._option2, this._option3);
+  Question.createQuestion4Options(this._id, this._nameQuiz,this._reponse, this._question, this._option1, this._option2,this._option3, this._option4 );
+
+  Map<String, Object?> toJson() => {
+    QuestionFields.id: id,
+    QuestionFields.name: nameQuiz,
+    QuestionFields.reponse: reponse,
+    QuestionFields.question: question,
+    QuestionFields.option1: option1,
+    QuestionFields.option2: option2,
+    QuestionFields.option3: option3,
+    QuestionFields.option4: option4
+  };
+
 
 
   int get id => _id;
@@ -69,6 +87,39 @@ class Question{
   set option1(String value) {
     _option1 = value;
   }
+
+  Question copy({
+    int? id,
+    int? nameQuiz,
+    String? reponse,
+    String? question,
+
+    String? option1,
+    String? option2,
+    String? option3,
+    String? option4,
+  }) =>
+      Question.createQuestion4Options(
+          id ?? this.id,
+          nameQuiz ?? this.nameQuiz,
+          reponse ?? this.reponse,
+          question ?? this.question,
+          option1 ?? this.option1,
+          option2 ?? this.option2,
+          option3 ?? this.option3,
+          option4 ?? this.option4
+      );
+
+  static Question fromJson(Map<String, Object?> json) => Question.createQuestion4Options(
+   json[QuestionFields.id] as int,
+    json[QuestionFields.name] as int,
+    json[QuestionFields.reponse] as String,
+    json[QuestionFields.question] as String,
+    json[QuestionFields.option1] as String,
+    json[QuestionFields.option2] as String,
+    json[QuestionFields.option3] as String,
+    json[QuestionFields.option4] as String
+  );
 
 
 }
