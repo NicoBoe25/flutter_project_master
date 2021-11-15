@@ -33,41 +33,40 @@ var _quizes = Quizz();
 
     final item = _quizes.list_quizes[index];
     return Dismissible(
-    key: Key(item),
-    background: Container(
-    child: Icon(
-    Icons.delete,
-    size: 40,
-    color: Colors.white,
-    ),
-    color: Colors.cyan,
-    ),
-    onDismissed: (direction) {
-    _remove(index);
-    var snackBar = SnackBar(
-    content: Text('Suppression du grand site $item'),
-    action: SnackBarAction(
-    label: 'Annulation suppression',
-    onPressed: () {
-    setState(() {
-    _quizes.add(item);
-    });
-    }
-    )
-    );
-    ScaffoldMessenger.of(context).showSnackBar(snackBar);
-    },
-    child: Card(
-    child: ListTile(
-    title: Text(
-    _quizes.list_quizes[index],
-    textAlign: TextAlign.center,
-    ),
-        onTap: () {
-          var snackBar =
-          SnackBar(content: Text('$item'));
+        key: Key(item),
+        background: Container(
+          child: Icon(
+            Icons.delete,
+            size: 40,
+            color: Colors.white,
+          ),
+          color: Colors.cyan,
+        ),
+        onDismissed: (direction) {
+          _remove(index);
+          var snackBar = SnackBar(
+              content: Text('Suppression du grand site $item'),
+              action: SnackBarAction(
+                  label: 'Annulation suppression',
+                  onPressed: () {
+                    setState(() {
+                      _quizes.add(item);
+                    });
+                  })
+          );
           ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        })));
+          },
+        child: Card(
+            child: ListTile(
+                title: Text(
+                  _quizes.list_quizes[index],
+                  textAlign: TextAlign.center,
+                ),
+                onTap: () {
+                  var snackBar =
+                  SnackBar(content: Text('$item'));
+                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+                })));
     }),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -95,8 +94,7 @@ var _quizes = Quizz();
     );
 
 
-
-}
+  }
 }
 
 
