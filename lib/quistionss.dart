@@ -1,6 +1,7 @@
 final String tableQuestions = 'questions';
 
 class QuestionFields{
+  static final String id = '_id';
   static final String name = '_name';
   static final String reponse = '_reponse';
   static final String question = '_question';
