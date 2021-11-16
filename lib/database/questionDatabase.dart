@@ -69,9 +69,58 @@ class QuestionDatabase{
     else{
       throw Exception('ID $idQuestion not found');
     }
+  }
+
+  Future<List<Question>> readAllQuestion() async {
+    final db = await instance.database;
+
+    final orderBy = '${QuestionFields.id} ASC';
+    final result = await db.query(tableQuestions, orderBy: orderBy);
+
+    return result.map((json) => Question.fromJson(json)).toList();
+  }
+
+  Future<List<Question>> readAllQuestionFromQuizId(int idquiz) async {
+    final db = await instance.database;
+
+    final maps = await db.query(
+      tableQuestions,
+      columns: QuestionFields.values,
+      where: '${QuestionFields.name} = ?',
+      whereArgs: [idquiz],
+    );
+    if(maps.isNotEmpty){
+      return maps.map((json) => Question.fromJson(json)).toList();
+    }
+    else{
+      throw Exception('ID $idquiz not found');
+    }
 
   }
 
+
+  Future<int> update(Question question) async {
+    final db = await instance.database;
+
+    return db.update(
+        tableQuestions,
+        question.toJson(),
+        where: '${QuestionFields.id} = ?',
+        whereArgs: [question.id]
+    );
+  }
+
+
+
+  Future<int> delete(int id) async {
+    final db = await instance.database;
+
+    return await db.delete(
+      tableQuestions,
+        where: '${QuestionFields.id} = ?',
+        whereArgs: [id]
+    );
+  }
 
 
     Future _close() async {
