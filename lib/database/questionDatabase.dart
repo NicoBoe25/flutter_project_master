@@ -1,4 +1,4 @@
-import 'package:flutter_project_master/quistionss.dart';
+import 'package:flutter_project_master/question.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -12,7 +12,7 @@ class QuestionDatabase{
   Future<Database> get database async{
     if( _database != null) return _database!;
 
-    _database = await _initDB('quiz.db');
+    _database = await _initDB('question.db');
     return _database!;
   }
 
