@@ -1,55 +1,75 @@
-import 'package:flutter_project_master/question.dart';
+import 'dart:core';
+
+final String tableQuiz = 'quizs';
+
+class QuizFields{
+  static final List<String> values = [
+    id,name
+  ];
+  static final String id = '_id';
+  static final String name = '_name';
+}
 
 class Quiz {
-   int _id = 1 ;
-   String _name;
 
-  List<Question> _list_questions = <Question>[] ;
+  int _id = 0;
+  String _name = "";
 
-   Quiz(this._id,this._name){
-     this.addAll();
-   }
-
-  Quiz.createQuiz( this._id , this._list_questions, this._name );
+  Quiz(this._id, this._name){
+      this._addAll();
+  }
+  List<String> _list_quizes = List<String>.filled(0,"",growable: true) ;
 
 
-   int get id => _id;
-   List<Question> get list_questions => _list_questions;
-   String get name => _name;
+  List<String> get list_quizes => _list_quizes;
 
-   set name(String value) {
-     _name = value;
-   }
+  int get id => _id;
 
-   set id(int value) {
-     _id = value;
-   }
-   set list_questions(List<Question> value) {
-     _list_questions = value;
-   }
+  set id(int value) {
+    _id = value;
+  }
+  String get name => _name;
+
+  set name(String value) {
+    _name = value;
+  }
 
 
-   Question remove(int index) {
-     return _list_questions.removeAt(index) ;
-   }
-
-   void add (Question siteName) {
-     _list_questions.add(siteName) ;
-   }
-
-   void insert (int position, Question question) {
-     _list_questions.insert(position, question) ;
-   }
+  String remove(int index) {
+    return _list_quizes.removeAt(index) ;
+  }
 
 
-   void addAll(){
-     _list_questions.add(new Question.createQuestion4Options("Amazone", "Le fleuve le plus long du monde", "Nil", "Amazone", "Gange", "Danube"));
-     _list_questions.add(new Question.createQuestion4Options("Amazone", "Le fleuve le plus gros débit du monde", "Gange", "Amazone", "Mississipi", "Congo"));
-     _list_questions.add(new Question.createQuestion4Options("Everest", "Le mont le plus haut du monde", "Lhotse", "Everest", "Morond", "K2"));
-     _list_questions.add(new Question.createQuestion4Options("Danube", "Le fleuve le plus long d'Europe", "Volga", "Rhone", "Danube", "Po"));
-     _list_questions.add(new Question.createQuestion4Options("Pacifique", "L océan le plus grand du monde", "Indien", "Arctique", "Pacifique", "Atlantique"));
-     _list_questions.add(new Question.createQuestion4Options("Franche-Comte", "La plus belle région de France", "Bretagne", "Franche-Comte", "Limousin", "Centre"));
-   }
+  void add (String quizName) {
+    _list_quizes.add(quizName) ;
+  }
+
+  void _addAll(){
+    _list_quizes.add("animale quiz");
+    _list_quizes.add("general quiz");
+    _list_quizes.add("franch quiz");
+
+  }
+
+  Quiz copy({
+  int? id,
+  String? name,
+}) =>
+      Quiz(
+        id ?? this.id,
+        name ?? this.name
+      );
+
+  Map<String, Object?> toJson() => {
+    QuizFields.id: id,
+    QuizFields.name: name
+  };
+
+  static Quiz fromJson(Map<String, Object?> json) => Quiz(
+    json[QuizFields.id] as int,
+    json[QuizFields.name] as String
+  );
+
 
 
 }

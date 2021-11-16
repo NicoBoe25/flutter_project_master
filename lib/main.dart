@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_master/doquiz.dart';
 import 'package:flutter_project_master/playquiz.dart';
 
 void main() {

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project_master/quizz.dart';
+import 'package:flutter_project_master/quiz.dart';
 
 class Playquiz extends StatefulWidget{
   @override
@@ -12,7 +12,7 @@ class Playquiz extends StatefulWidget{
 
 }
 class letsDoQuiz extends State<Playquiz> {
-var _quizes = Quizz();
+var _quizes = Quiz(1, "a");
 
 
   void _remove(int index) {
