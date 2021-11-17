@@ -7,18 +7,10 @@ class Playquiz extends StatefulWidget{
   State<StatefulWidget> createState() {
   return new LetsDoQuiz();
   }
-
-
-
 }
+
 class LetsDoQuiz extends State<Playquiz> {
 var _quizes = Quiz(1, "a");
-
-  void _remove(int index) {
-    setState(() {
-      _quizes.remove(index);
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
