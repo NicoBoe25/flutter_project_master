@@ -7,10 +7,20 @@ class Playquiz extends StatefulWidget{
   State<StatefulWidget> createState() {
   return new LetsDoQuiz();
   }
+
+
+
 }
 
 class LetsDoQuiz extends State<Playquiz> {
-var _quizes = Quiz(1, "a");
+  late List<Quiz> quiz;
+
+
+  Future refreshQuizes() async {
+
+    this.quiz = await QuizDatabase.instance.readAllQuiz();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,20 +29,10 @@ var _quizes = Quiz(1, "a");
         title: const Text('Quizes'),
     ),
     body:ListView.builder(
-    itemCount: _quizes.list_quizes.length,
+    itemCount: quiz.length,
     itemBuilder: (BuildContext context, int index) {
 
-    final item = _quizes.list_quizes[index];
-    return Dismissible(
-        key: Key(item),
-        background: Container(
-          child: Icon(
-            Icons.delete,
-            size: 40,
-            color: Colors.white,
-          ),
-          color: Colors.cyan,
-        ),
+    final item = refreshQuizes();
         child: Card(
             child: ListTile(
                 title: Text(
