@@ -1,4 +1,4 @@
-import 'package:flutter_project_master/question.dart';
+import 'package:flutter_project_master/classObject/question.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -28,12 +28,13 @@ class QuestionDatabase{
   Future _createDB(Database db, int version) async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     final textType = 'TEXT';
-    final intType = 'INTEGER';
+
+    final intKeyForeign = 'INTEGER FOREIGN KEY';
 
     await db.execute('''
     CREATE TABLE $tableQuestions (
     ${QuestionFields.id} $idType,
-    ${QuestionFields.name} $intType,
+    ${QuestionFields.name} $intKeyForeign,
     
     ${QuestionFields.reponse} $textType,
     ${QuestionFields.question} $textType,
@@ -95,9 +96,7 @@ class QuestionDatabase{
     else{
       throw Exception('ID $idquiz not found');
     }
-
   }
-
 
   Future<int> update(Question question) async {
     final db = await instance.database;
@@ -110,8 +109,6 @@ class QuestionDatabase{
     );
   }
 
-
-
   Future<int> delete(int id) async {
     final db = await instance.database;
 
@@ -122,10 +119,8 @@ class QuestionDatabase{
     );
   }
 
-
     Future _close() async {
     final db = await instance.database;
-
     db.close();
   }
 }

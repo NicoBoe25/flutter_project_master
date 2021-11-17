@@ -1,4 +1,4 @@
-import 'package:flutter_project_master/quiz.dart';
+import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -71,8 +71,6 @@ class QuizDatabase{
     return result.map((json) => Quiz.fromJson(json)).toList();
   }
 
-
-
   Future<int> update(Quiz quiz) async {
     final db = await instance.database;
 
@@ -83,8 +81,6 @@ class QuizDatabase{
         whereArgs: [quiz.id]
     );
   }
-
-
 
   Future<int> delete(int id) async {
     final db = await instance.database;
