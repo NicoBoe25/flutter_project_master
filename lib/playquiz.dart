@@ -2,6 +2,8 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
 
+import 'database/quizDatabase.dart';
+
 class Playquiz extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
@@ -24,31 +26,33 @@ class LetsDoQuiz extends State<Playquiz> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
         appBar: AppBar(
         title: const Text('Quizes'),
-    ),
+        ),
     body:ListView.builder(
     itemCount: quiz.length,
     itemBuilder: (BuildContext context, int index) {
+      final item = quiz[index];
 
-    final item = refreshQuizes();
-        child: Card(
-            child: ListTile(
-                title: Text(
-                  _quizes.list_quizes[index],
-                  textAlign: TextAlign.center,
-                ),
-                onTap: () {
-                  var snackBar =
-                  SnackBar(content: Text('$item'));
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                })));
-    }),
+      return Card(
+          key: Key(item.name),
+        child: ListTile(
+          title: Text(
+            quiz[index].name,
+            textAlign: TextAlign.center,
+          ),
+          onTap: () {
+            var snackBar =
+            SnackBar(content: Text('$item'));
+            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        })
+      );
+    })
     );
 
-
-  }
+    }
 }
 
 

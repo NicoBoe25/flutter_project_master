@@ -18,11 +18,21 @@ class PlayEditionQuiz extends State<EditionQuiz> {
       list_quizes.remove(index);
     });
   }
+  void _cancelDeleteQuiz(Quiz item){
+    addNewQuiz(item.name);
+  }
 
   void addNewQuiz(String s) {
     setState(() {
       list_quizes.add(Quiz(list_quizes.length,s));
     });
+  }
+
+  int launchAddFonction(){
+    list_quizes.add(Quiz(1, "test1"));
+    list_quizes.add(Quiz(2, "test2"));
+    list_quizes.add(Quiz(3, "test3"));
+    return list_quizes.length;
   }
 
 
@@ -32,7 +42,8 @@ class PlayEditionQuiz extends State<EditionQuiz> {
         title: const Text('Quizes'),
       ),
       body:ListView.builder(
-          itemCount: list_quizes.length,
+
+          itemCount: launchAddFonction(),
           itemBuilder: (BuildContext context, int index) {
 
             final item = list_quizes[index];
@@ -47,13 +58,14 @@ class PlayEditionQuiz extends State<EditionQuiz> {
                   color: Colors.cyan,
                 ),
                 onDismissed: (direction) {
+                  _removeQuiz(index);
                   var snackBar = SnackBar(
-                      content: Text('Suppression du grand site $item'),
+                      content: Text('Suppression du quiz $item'),
                       action: SnackBarAction(
                           label: 'Annulation suppression',
                           onPressed: () {
                             setState(() {
-                              _removeQuiz(index);
+                              _cancelDeleteQuiz(item);
                             });
                           })
                   );

@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project_master/database/questionDatabase.dart';
 import 'package:flutter_project_master/database/quizDatabase.dart';
 import 'package:flutter_project_master/playquiz.dart';
-import 'package:flutter_project_master/quiz.dart';
 
+
+import 'classObject/quiz.dart';
 import 'editionQuiz.dart';
 
 void main() {
