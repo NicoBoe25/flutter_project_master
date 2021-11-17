@@ -1,19 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_project_master/quiz.dart';
+import 'package:flutter_project_master/classObject/quiz.dart';
 
 class Playquiz extends StatefulWidget{
   @override
   State<StatefulWidget> createState() {
-    return new letsDoQuiz();
+  return new LetsDoQuiz();
   }
 
 
 
 }
-class letsDoQuiz extends State<Playquiz> {
+class LetsDoQuiz extends State<Playquiz> {
 var _quizes = Quiz(1, "a");
-
 
   void _remove(int index) {
     setState(() {

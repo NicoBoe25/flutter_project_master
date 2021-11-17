@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/playquiz.dart';
 
+import 'editionQuiz.dart';
+
 void main() {
   runApp(MyQuiz());
 }
@@ -41,7 +43,7 @@ class _AllMyQuizs extends State<MyQuizs> {
             //margin: EdgeInsets.all(10),
             child: ElevatedButton(
               child: Text('Gérer', style: TextStyle(fontSize: 20.0),),
-              onPressed: () {},
+              onPressed: () {startEditionQuiz();},
             ),
           ),
         ]
@@ -53,6 +55,12 @@ class _AllMyQuizs extends State<MyQuizs> {
   void startQuiz(){
     setState(() {
       Navigator.push(context, new MaterialPageRoute(builder: (context)=> new Playquiz()));
+    });
+  }
+
+  void startEditionQuiz(){
+    setState(() {
+      Navigator.push(context, new MaterialPageRoute(builder: (context)=> new EditionQuiz()));
     });
   }
 }
