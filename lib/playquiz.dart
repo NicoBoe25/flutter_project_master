@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_project_master/database/quizDatabase.dart';
 import 'package:flutter_project_master/quiz.dart';
 
 class Playquiz extends StatefulWidget{
@@ -7,18 +8,21 @@ class Playquiz extends StatefulWidget{
   State<StatefulWidget> createState() {
     return new letsDoQuiz();
   }
-
-
-
 }
 class letsDoQuiz extends State<Playquiz> {
-var _quizes = Quiz(1, "a");
+  late List<Quiz> quiz;
 
+  //var listQuiz = QuizDatabase.instance.readAllQuiz();
 
   void _remove(int index) {
     setState(() {
-      _quizes.remove(index);
+      //_quizes.remove(index);
     });
+  }
+  Future refreshQuizes() async {
+
+    this.quiz = await QuizDatabase.instance.readAllQuiz();
+
   }
 
   @override
@@ -28,10 +32,10 @@ var _quizes = Quiz(1, "a");
         title: const Text('Quizes'),
     ),
     body:ListView.builder(
-    itemCount: _quizes.list_quizes.length,
+    itemCount: quiz.length,
     itemBuilder: (BuildContext context, int index) {
 
-    final item = _quizes.list_quizes[index];
+    final item = refreshQuizes();
     return Dismissible(
         key: Key(item),
         background: Container(
@@ -50,7 +54,7 @@ var _quizes = Quiz(1, "a");
                   label: 'Annulation suppression',
                   onPressed: () {
                     setState(() {
-                      _quizes.add(item);
+                      quiz.add(item);
                     });
                   })
           );
@@ -81,7 +85,7 @@ var _quizes = Quiz(1, "a");
                           hintText: "Saisissez le nom du grand site"),
                       onSubmitted: (value) {
                         setState(() {
-                          _quizes.add(value);
+                          quiz.add(value);
                         });
                         Navigator.of(context).pop();
                       }),

@@ -15,13 +15,7 @@ class Quiz {
   int _id = 0;
   String _name = "";
 
-  Quiz(this._id, this._name){
-      this._addAll();
-  }
-  List<String> _list_quizes = List<String>.filled(0,"",growable: true) ;
-
-
-  List<String> get list_quizes => _list_quizes;
+  Quiz(this._id, this._name){}
 
   int get id => _id;
 
@@ -34,22 +28,6 @@ class Quiz {
     _name = value;
   }
 
-
-  String remove(int index) {
-    return _list_quizes.removeAt(index) ;
-  }
-
-
-  void add (String quizName) {
-    _list_quizes.add(quizName) ;
-  }
-
-  void _addAll(){
-    _list_quizes.add("animale quiz");
-    _list_quizes.add("general quiz");
-    _list_quizes.add("franch quiz");
-
-  }
 
   Quiz copy({
   int? id,

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_master/database/questionDatabase.dart';
+import 'package:flutter_project_master/database/quizDatabase.dart';
 import 'package:flutter_project_master/playquiz.dart';
+import 'package:flutter_project_master/quiz.dart';
 
 void main() {
   runApp(MyQuiz());
@@ -17,7 +20,19 @@ class MyQuiz extends StatelessWidget {
 class MyQuizs extends StatefulWidget {
   @override
   _AllMyQuizs createState() {
+    initBaseDiDonne();
     return _AllMyQuizs();
+
+  }
+  void initBaseDiDonne(){
+    var idbquiz = QuizDatabase.instance;
+    var dbQyiz = idbquiz.database;
+    var dbQuestion = QuestionDatabase.instance.database;
+
+    var _quiz1 =  Quiz(1 , "premier quiz");
+    var _quiz2 = Quiz(2 , "deuxieme quiz");
+    idbquiz.create(_quiz1);
+    idbquiz.create(_quiz2);
 
   }
 }
@@ -53,7 +68,11 @@ class _AllMyQuizs extends State<MyQuizs> {
   void startQuiz(){
     setState(() {
       Navigator.push(context, new MaterialPageRoute(builder: (context)=> new Playquiz()));
+
+
     });
   }
+
+
 }
 
