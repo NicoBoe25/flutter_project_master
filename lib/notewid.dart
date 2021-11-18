@@ -48,6 +48,7 @@ class NoteFormWidget extends StatelessWidget {
                       title != null && title.isEmpty ? 'veuillez saisir un nom de quiz ' : null,
                       onChanged: onChangedName,
                     ),
+
                   ])
                     )),
                   ]),

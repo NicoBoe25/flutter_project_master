@@ -198,14 +198,14 @@ CREATE TABLE $tableQuizs (
     return result.map((json) => Quiz.fromJson(json)).toList();
   }
 
-  Future<int> update(Quiz note) async {
+  Future<int> update(Quiz quiz) async {
     final db = await instance.database;
 
     return db.update(
       tableQuizs,
-      note.toJson(),
+      quiz.toJson(),
       where: '${QuizFields.id} = ?',
-      whereArgs: [note.id],
+      whereArgs: [quiz.id],
     );
   }
 
