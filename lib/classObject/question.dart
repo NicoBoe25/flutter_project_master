@@ -19,7 +19,7 @@ class QuestionFields{
 
 }
 
-class Note {
+class Question {
   //final int? id;
   final String question;
   final String option1;
@@ -30,7 +30,7 @@ class Note {
 
 
 
-  const Note({
+  const Question({
    // this.id,
     required this.question,
     required this.option1,
@@ -42,7 +42,7 @@ class Note {
 
   });
 
-  Note copy({
+  Question copy({
     //int? id,
     String? question,
     String? option1,
@@ -54,7 +54,7 @@ class Note {
 
 
   }) =>
-      Note(
+      Question(
         //id: id ?? this.id,
         question: question ?? this.question,
         option1: option1 ?? this.option1,
@@ -65,7 +65,7 @@ class Note {
 
       );
 
-  static Note fromJson(Map<String, Object?> json) => Note(
+  static Question fromJson(Map<String, Object?> json) => Question(
     //id: json[QuestionFields.id] as int?,
     question: json[QuestionFields.question]as String,
     option1: json[QuestionFields.option1]as String,
