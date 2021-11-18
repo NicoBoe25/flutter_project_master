@@ -1,53 +1,45 @@
-import 'dart:core';
 
-final String tableQuiz = 'quizs';
+final String tableQuizs = 'quizes';
 
-class QuizFields{
+class QuizFields {
   static final List<String> values = [
-    id,name
+    /// Add all fields
+    id, name
   ];
+
   static final String id = '_id';
-  static final String name = '_name';
+  static final String name = 'name';
+
 }
 
 class Quiz {
+  final int? id;
+  final String name;
 
-  int _id = 0;
-  String _name = "";
-
-  Quiz(this._id, this._name){}
-
-  int get id => _id;
-
-  set id(int value) {
-    _id = value;
-  }
-  String get name => _name;
-
-  set name(String value) {
-    _name = value;
-  }
-
+  const Quiz({
+    this.id,
+    required this.name,
+  });
 
   Quiz copy({
-  int? id,
-  String? name,
-}) =>
+    int? id,
+    String? name,
+
+  }) =>
       Quiz(
-        id ?? this.id,
-        name ?? this.name
+        id: id ?? this.id,
+        name: name ?? this.name,
       );
+
+  static Quiz fromJson(Map<String, Object?> json) => Quiz(
+    id: json[QuizFields.id] as int?,
+    name: json[QuizFields.name]as String,
+
+  );
 
   Map<String, Object?> toJson() => {
     QuizFields.id: id,
-    QuizFields.name: name
+    QuizFields.name: name,
+
   };
-
-  static Quiz fromJson(Map<String, Object?> json) => Quiz(
-    json[QuizFields.id] as int,
-    json[QuizFields.name] as String
-  );
-
-
-
 }

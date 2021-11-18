@@ -5,7 +5,7 @@ import 'package:flutter_project_master/playquiz.dart';
 
 
 import 'classObject/quiz.dart';
-import 'editionQuiz.dart';
+import 'editionquiz.dart';
 
 void main() {
   runApp(MyQuiz());
@@ -23,11 +23,11 @@ class MyQuiz extends StatelessWidget {
 class MyQuizs extends StatefulWidget {
   @override
   _AllMyQuizs createState() {
-    initBaseDiDonne();
+    //initBaseDiDonne();
     return _AllMyQuizs();
 
   }
-  void initBaseDiDonne(){
+ /* void initBaseDiDonne(){
     var idbquiz = QuizDatabase.instance;
     var dbQyiz = idbquiz.database;
     var dbQuestion = QuestionDatabase.instance.database;
@@ -37,7 +37,7 @@ class MyQuizs extends StatefulWidget {
     idbquiz.create(_quiz1);
     idbquiz.create(_quiz2);
 
-  }
+  }*/
 }
 class _AllMyQuizs extends State<MyQuizs> {
 

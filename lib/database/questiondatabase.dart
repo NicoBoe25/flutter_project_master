@@ -2,7 +2,8 @@ import 'package:flutter_project_master/classObject/question.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-class QuestionDatabase{
+
+/*class QuestionDatabase{
   static final QuestionDatabase instance = QuestionDatabase._init();
 
   static Database? _database;
@@ -123,4 +124,4 @@ class QuestionDatabase{
     final db = await instance.database;
     db.close();
   }
-}
+}*/

@@ -1,58 +1,71 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
+import 'package:flutter_project_master/database/quizdatabase.dart';
 
-import 'database/quizDatabase.dart';
 
-class Playquiz extends StatefulWidget{
+
+class Playquiz extends StatefulWidget {
   @override
-  State<StatefulWidget> createState() {
-  return new LetsDoQuiz();
-  }
-
-
-
+  _NotesPageState createState() => _NotesPageState();
 }
 
-class LetsDoQuiz extends State<Playquiz> {
-  late List<Quiz> quiz;
+class _NotesPageState extends State<Playquiz> {
+  late List<Quiz> quizes;
+  bool isLoading = false;
 
+  @override
+  void initState() {
+    super.initState();
 
-  Future refreshQuizes() async {
-
-    this.quiz = await QuizDatabase.instance.readAllQuiz();
-
+    refreshQuizes();
   }
 
   @override
-  Widget build(BuildContext context) {
+  void dispose() {
+    QuizDatabase.instance.close();
 
-    return Scaffold(
-        appBar: AppBar(
-        title: const Text('Quizes'),
-        ),
-    body:ListView.builder(
-    itemCount: quiz.length,
-    itemBuilder: (BuildContext context, int index) {
-      final item = quiz[index];
+    super.dispose();
+  }
 
-      return Card(
-          key: Key(item.name),
-        child: ListTile(
-          title: Text(
-            quiz[index].name,
-            textAlign: TextAlign.center,
-          ),
-          onTap: () {
-            var snackBar =
-            SnackBar(content: Text('$item'));
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        })
-      );
-    })
-    );
+  Future refreshQuizes() async {
+    setState(() => isLoading = true);
 
-    }
+    this.quizes = await QuizDatabase.instance.readAllNotes();
+
+    setState(() => isLoading = false);
+  }
+
+ @override
+ Widget build(BuildContext context) {
+   return MaterialApp(
+     home: Scaffold(
+       appBar: AppBar(title: const Text('Quizes'),
+       ),
+       body: Center(
+         child: FutureBuilder<List<Quiz>>(
+             future: QuizDatabase.instance.readAllNotes(),
+             builder: (BuildContext context,
+                 AsyncSnapshot<List<Quiz>> snapshot) {
+               if (!snapshot.hasData) {
+                 return Center(child: Text('Loading...'));
+               }
+               return snapshot.data!.isEmpty ? Center(child: Text('No quizes in List.'))
+                   : ListView(
+                 children: snapshot.data!.map((quiz) {
+                   return Center(
+                     child: ListTile(
+                       title: Text(quiz.name),
+                     ),
+                   );
+                 }).toList(),
+               );
+             }),
+       ),
+
+     ),
+   );
+ }
 }
 
 
