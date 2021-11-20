@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/database/quizdatabase.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
-import 'package:flutter_project_master/notewid.dart';
+import 'package:flutter_project_master/quizwid.dart';
 
 //import 'package:sqflite_database_example/widget/note_form_widget.dart';
 import 'package:flutter/material.dart';

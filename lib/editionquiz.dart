@@ -13,7 +13,7 @@ import 'package:flutter_project_master/quizcards.dart';
 
 
 import 'ajouterquiz.dart';
-import 'notewid.dart';
+import 'quizwid.dart';
 
 
 
