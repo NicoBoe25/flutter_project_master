@@ -6,21 +6,20 @@ import 'package:flutter_project_master/notewid.dart';
 //import 'package:sqflite_database_example/widget/note_form_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-class AddEditNotePage extends StatefulWidget {
+class AddQuizPage extends StatefulWidget {
   final Quiz? quiz;
 
-  const AddEditNotePage({
+  const AddQuizPage({
     Key? key,
     this.quiz,
   }) : super(key: key);
   @override
-  _AddEditNotePageState createState() => _AddEditNotePageState();
+  _AddEditQuizPageState createState() => _AddEditQuizPageState();
 }
 
-class _AddEditNotePageState extends State<AddEditNotePage> {
+class _AddEditQuizPageState extends State<AddQuizPage> {
   final _formKey = GlobalKey<FormState>();
 
-  late int id;
   late String name;
 
 
@@ -31,7 +30,6 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     super.initState();
 
 
-    id = widget.quiz?.id ?? 0;
     name = widget.quiz?.name ?? '';
   }
 
@@ -44,8 +42,7 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
     ),
     body: Form(
       key: _formKey,
-      child: NoteFormWidget(
-        id: id,
+      child: QuizFormWidget(
         name: name,
         //onChangedId: (id) => setState(() => this.id = id),
         onChangedName: (name) => setState(() => this.name = name),
@@ -63,45 +60,43 @@ class _AddEditNotePageState extends State<AddEditNotePage> {
           onPrimary: Colors.white,
           primary: isFormValid ? null : Colors.grey.shade700,
         ),
-        onPressed: addOrUpdateNote,
+        onPressed: addOrUpdateQuiz,
         child: Text('Save'),
       ),
     );
   }
 
-  void addOrUpdateNote() async {
+  void addOrUpdateQuiz() async {
     final isValid = _formKey.currentState!.validate();
 
     if (isValid) {
       final isUpdating = widget.quiz != null;
 
       if (isUpdating) {
-        await updateNote();
+        await updateQuiz();
       } else {
-        await addNote();
+        await addQuiz();
       }
 
       Navigator.of(context).pop();
     }
   }
 
-  Future updateNote() async {
-    final note = widget.quiz!.copy(
+  Future updateQuiz() async {
+    final quiz = widget.quiz!.copy(
 
-      id: id,
       name: name,
     );
 
-    await QuizDatabase.instance.update(note);
+    await QuizDatabase.instance.update(quiz);
   }
 
-  Future addNote() async {
-    final note = Quiz(
+  Future addQuiz() async {
+    final quiz = Quiz(
       name: name,
-      id: id,
 
     );
 
-    await QuizDatabase.instance.create(note);
+    await QuizDatabase.instance.create(quiz);
   }
 }

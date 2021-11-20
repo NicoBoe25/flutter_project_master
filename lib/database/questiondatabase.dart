@@ -36,10 +36,10 @@ import 'package:path/path.dart';
     CREATE TABLE $tableQuestions (
     ${QuestionFields.id} $idType,
     ${QuestionFields.name} $intKeyForeign,
-    
+
     ${QuestionFields.reponse} $textType,
     ${QuestionFields.question} $textType,
-    
+
     ${QuestionFields.option1} $textType,
     ${QuestionFields.option2} $textType,
     ${QuestionFields.option3} $textType,

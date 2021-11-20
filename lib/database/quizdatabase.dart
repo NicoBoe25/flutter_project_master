@@ -186,7 +186,7 @@ CREATE TABLE $tableQuizs (
     }
   }
 
-  Future<List<Quiz>> readAllNotes() async {
+  Future<List<Quiz>> readAllQuizes() async {
     final db = await instance.database;
 
     final orderBy = '${QuizFields.id} ASC';

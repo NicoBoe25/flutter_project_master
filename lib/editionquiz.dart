@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 import 'package:path_provider/path_provider.dart';
@@ -7,21 +8,26 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:flutter_project_master/database/quizdatabase.dart';
+import 'package:flutter_project_master/ajouterquiz.dart';
+import 'package:flutter_project_master/quizcards.dart';
+
 
 import 'ajouterquiz.dart';
+import 'notewid.dart';
 
 
 
 
 class EditionQuiz extends StatefulWidget {
   @override
-  _NotesPageState createState() => _NotesPageState();
+  _QuizesPageState createState() => _QuizesPageState();
 }
 
-class _NotesPageState extends State<EditionQuiz> {
+class _QuizesPageState extends State<EditionQuiz> {
   final textController = TextEditingController();
 
   late List<Quiz> quizes;
+  late Quiz quiz;
   bool isLoading = false;
 
   @override
@@ -41,54 +47,61 @@ class _NotesPageState extends State<EditionQuiz> {
   Future refreshQuizes() async {
     setState(() => isLoading = true);
 
-    this.quizes = await QuizDatabase.instance.readAllNotes();
+    this.quizes = await QuizDatabase.instance.readAllQuizes();
 
     setState(() => isLoading = false);
   }
 
 
   @override
-  Widget build(BuildContext context) =>
-      Scaffold(
-        appBar: AppBar(title: TextField(
-          controller: textController,
-        ),),
-        body: Center(
-          child: FutureBuilder<List<Quiz>>(
-              future: QuizDatabase.instance.readAllNotes(),
-              builder: (BuildContext context,
-                  AsyncSnapshot<List<Quiz>> snapshot) {
-                if (!snapshot.hasData) {
-                  return Center(child: Text('Loading...'));
-                }
-                return snapshot.data!.isEmpty ? Center(
-                    child: Text('No Quizes in List.'))
-                    : ListView(
-                  children: snapshot.data!.map((quiz) {
-                    return Center(
-                      child: ListTile(
-                        title: Text(quiz.name),
+  Widget build(BuildContext context) => Scaffold(
+    appBar: AppBar(
+      title: Text(
+        'Quizes',
+        style: TextStyle(fontSize: 24),
+      ),
+    ),
+    body: Center(
+      child: isLoading
+          ? CircularProgressIndicator()
+          : quizes.isEmpty
+          ? Text(
+        'No Quizes',
+        style: TextStyle(color: Colors.white, fontSize: 24),
+      )
+          : buildNotes(),
+    ),
+    floatingActionButton: FloatingActionButton(
+      backgroundColor: Colors.black,
+      child: Icon(Icons.add),
+      onPressed: () async {
+        await Navigator.of(context).push(
+          MaterialPageRoute(builder: (context) => AddQuizPage()),
+        );
 
-                      ),
-                    );
-                  }).toList(),
-                );
-              }),
-        ),
-        floatingActionButton: FloatingActionButton(
-          backgroundColor: Colors.black,
-          child: Icon(Icons.add),
-          onPressed: () async {
-            await Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => AddEditNotePage()),
-            );
+        refreshQuizes();
+      },
+    ),
+  );
 
-            refreshQuizes();
-          },
-        ),
+  Widget buildNotes() => StaggeredGridView.countBuilder(
+    padding: EdgeInsets.all(8),
+    itemCount: quizes.length,
+    staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+    crossAxisCount: 4,
+    mainAxisSpacing: 4,
+    crossAxisSpacing: 4,
+    itemBuilder: (context, index) {
+      final quiz = quizes[index];
+
+      return GestureDetector(
+        onTap: () {},
+        child: QuizCardWidget(quiz: quiz, index: index),
+
       );
-
-  /*Widget buildNotes() => ListeView.countBuilder(
+    }
+  );
+/*Widget buildNotes() => ListeView.countBuilder(
     padding: EdgeInsets.all(8),
     itemCount: notes.length,
     staggeredTileBuilder: (index) => StaggeredTile.fit(2),

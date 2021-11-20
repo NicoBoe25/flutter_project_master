@@ -31,12 +31,12 @@ class Question {
 
 
   const Question({
-   // this.id,
+    // this.id,
     required this.question,
     required this.option1,
     required this.option2,
-     this.option3,
-     this.option4,
+    this.option3,
+    this.option4,
     required this.answer,
 
 
@@ -67,18 +67,18 @@ class Question {
 
   static Question fromJson(Map<String, Object?> json) => Question(
     //id: json[QuestionFields.id] as int?,
-    question: json[QuestionFields.question]as String,
-    option1: json[QuestionFields.option1]as String,
-    option2: json[QuestionFields.option2]as String,
-    option3: json[QuestionFields.option3]as String,
-    option4: json[QuestionFields.option4]as String,
-    answer: json[QuestionFields.answer]as String
+      question: json[QuestionFields.question]as String,
+      option1: json[QuestionFields.option1]as String,
+      option2: json[QuestionFields.option2]as String,
+      option3: json[QuestionFields.option3]as String,
+      option4: json[QuestionFields.option4]as String,
+      answer: json[QuestionFields.answer]as String
 
 
   );
 
   Map<String, Object?> toJson() => {
-   // QuestionFields.id: id,
+    // QuestionFields.id: id,
     QuestionFields.question: question,
     QuestionFields.option1: option1,
     QuestionFields.option2: option2,

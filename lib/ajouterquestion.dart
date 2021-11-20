@@ -68,45 +68,45 @@ class _AddEditNotePageState extends State<AjouteQuestionPage> {
           onPrimary: Colors.white,
           primary: isFormValid ? null : Colors.grey.shade700,
         ),
-        onPressed: addOrUpdateNote,
+        onPressed: addOrUpdateQuestion,
         child: Text('Save'),
       ),
     );
   }
 
-  void addOrUpdateNote() async {
+  void addOrUpdateQuestion() async {
     final isValid = _formKey.currentState!.validate();
 
     if (isValid) {
       final isUpdating = widget.quiz != null;
 
       if (isUpdating) {
-        await updateNote();
+        await updateQuestion();
       } else {
-        await addNote();
+        await addQuestion();
       }
 
       Navigator.of(context).pop();
     }
   }
 
-  Future updateNote() async {
-    final note = widget.quiz!.copy(
+  Future updateQuestion() async {
+    final question = widget.quiz!.copy(
 
       id: id,
       name: name,
     );
 
-    await QuizDatabase.instance.update(note);
+    await QuizDatabase.instance.update(question);
   }
 
-  Future addNote() async {
-    final note = Quiz(
+  Future addQuestion() async {
+    final question = Quiz(
       name: name,
       id: id,
 
     );
 
-    await QuizDatabase.instance.create(note);
+    await QuizDatabase.instance.create(question);
   }
 }
