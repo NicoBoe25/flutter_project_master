@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 
-/*class QuestionDatabase{
+class QuestionDatabase{
   static final QuestionDatabase instance = QuestionDatabase._init();
 
   static Database? _database;
@@ -34,16 +34,15 @@ import 'package:path/path.dart';
 
     await db.execute('''
     CREATE TABLE $tableQuestions (
+  
     ${QuestionFields.id} $idType,
-    ${QuestionFields.name} $intKeyForeign,
-
-    ${QuestionFields.reponse} $textType,
     ${QuestionFields.question} $textType,
-
     ${QuestionFields.option1} $textType,
     ${QuestionFields.option2} $textType,
     ${QuestionFields.option3} $textType,
-    ${QuestionFields.option4} $textType
+    ${QuestionFields.option4} $textType,
+    ${QuestionFields.answer} $textType
+    
     )
     ''');
   }
@@ -88,7 +87,7 @@ import 'package:path/path.dart';
     final maps = await db.query(
       tableQuestions,
       columns: QuestionFields.values,
-      where: '${QuestionFields.name} = ?',
+      where: '${QuestionFields.id} = ?',
       whereArgs: [idquiz],
     );
     if(maps.isNotEmpty){
@@ -120,8 +119,8 @@ import 'package:path/path.dart';
     );
   }
 
-    Future _close() async {
+    Future close() async {
     final db = await instance.database;
     db.close();
   }
-}*/
+}

@@ -3,11 +3,10 @@ final String tableQuestions = 'questions';
 class QuestionFields{
   static final List<String> values = [
     /// Add all fields
-    //id,
-    question, option1 , option2, option3,option4,answer
+    id, question, option1 , option2, option3,option4,answer
   ];
 
-  //static final String id = '_id';
+  static final String id = '_id';
   static final String question = 'question';
   static final String option1 = 'option1';
   static final String option2 = 'option2';
@@ -20,7 +19,7 @@ class QuestionFields{
 }
 
 class Question {
-  //final int? id;
+  final int? id;
   final String question;
   final String option1;
   final String option2;
@@ -31,7 +30,7 @@ class Question {
 
 
   const Question({
-    // this.id,
+    this.id,
     required this.question,
     required this.option1,
     required this.option2,
@@ -43,7 +42,7 @@ class Question {
   });
 
   Question copy({
-    //int? id,
+    int? id,
     String? question,
     String? option1,
     String? option2,
@@ -55,7 +54,7 @@ class Question {
 
   }) =>
       Question(
-        //id: id ?? this.id,
+        id: id ?? this.id,
         question: question ?? this.question,
         option1: option1 ?? this.option1,
         option2: option1 ?? this.option2,
@@ -66,7 +65,7 @@ class Question {
       );
 
   static Question fromJson(Map<String, Object?> json) => Question(
-    //id: json[QuestionFields.id] as int?,
+    id: json[QuestionFields.id] as int?,
       question: json[QuestionFields.question]as String,
       option1: json[QuestionFields.option1]as String,
       option2: json[QuestionFields.option2]as String,
@@ -78,7 +77,7 @@ class Question {
   );
 
   Map<String, Object?> toJson() => {
-    // QuestionFields.id: id,
+     QuestionFields.id: id,
     QuestionFields.question: question,
     QuestionFields.option1: option1,
     QuestionFields.option2: option2,

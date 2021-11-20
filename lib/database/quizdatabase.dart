@@ -169,7 +169,7 @@ CREATE TABLE $tableQuizs (
     return quiz.copy(id: id);
   }
 
-  Future<Quiz> readNote(int id) async {
+  Future<Quiz> readQuiz(int id) async {
     final db = await instance.database;
 
     final maps = await db.query(

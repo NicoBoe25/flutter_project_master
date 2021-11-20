@@ -10,6 +10,9 @@ import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:flutter_project_master/database/quizdatabase.dart';
 import 'package:flutter_project_master/ajouterquiz.dart';
 import 'package:flutter_project_master/quizcards.dart';
+import 'package:flutter_project_master/ajouterquestion.dart';
+import 'package:flutter_project_master/quizdetail.dart';
+
 
 
 import 'ajouterquiz.dart';
@@ -24,7 +27,6 @@ class EditionQuiz extends StatefulWidget {
 }
 
 class _QuizesPageState extends State<EditionQuiz> {
-  final textController = TextEditingController();
 
   late List<Quiz> quizes;
   late Quiz quiz;
@@ -69,7 +71,7 @@ class _QuizesPageState extends State<EditionQuiz> {
         'No Quizes',
         style: TextStyle(color: Colors.white, fontSize: 24),
       )
-          : buildNotes(),
+          : buildQuiz(),
     ),
     floatingActionButton: FloatingActionButton(
       backgroundColor: Colors.black,
@@ -84,7 +86,7 @@ class _QuizesPageState extends State<EditionQuiz> {
     ),
   );
 
-  Widget buildNotes() => StaggeredGridView.countBuilder(
+  Widget buildQuiz() => StaggeredGridView.countBuilder(
     padding: EdgeInsets.all(8),
     itemCount: quizes.length,
     staggeredTileBuilder: (index) => StaggeredTile.fit(2),
@@ -95,7 +97,13 @@ class _QuizesPageState extends State<EditionQuiz> {
       final quiz = quizes[index];
 
       return GestureDetector(
-        onTap: () {},
+        onTap: () async {
+          await Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => DetailQuiz( quizId : quiz.id!)
+          ));
+
+          refreshQuizes();
+        },
         child: QuizCardWidget(quiz: quiz, index: index),
 
       );

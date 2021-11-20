@@ -10,37 +10,46 @@ import 'package:flutter_project_master/questionswid.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/material.dart';
-class AjouteQuestionPage extends StatefulWidget {
-  final Quiz? quiz;
+class AjouterQuestionPage extends StatefulWidget {
   final Question? question;
+  final Quiz? quiz;
 
-  const AjouteQuestionPage({
+
+  const AjouterQuestionPage({
     Key? key,
-    this.quiz, this.question,
+    this.question,
+    this.quiz,
   }) : super(key: key);
   @override
   _AddEditNotePageState createState() => _AddEditNotePageState();
 }
 
-class _AddEditNotePageState extends State<AjouteQuestionPage> {
+class _AddEditNotePageState extends State<AjouterQuestionPage> {
   final _formKey = GlobalKey<FormState>();
 
   late int id;
-  late String name;
-
+  late String question;
+  late String option1;
+  late String option2;
+  late String option3;
+  late String option4;
+  late String answer;
 
 
 
   @override
   void initState() {
     super.initState();
-
-
     id = widget.quiz?.id ?? 0;
-    name = widget.quiz?.name ?? '';
-  }
+    question = widget.question?.question ?? '';
+    option1 = widget.question?.option1 ?? '';
+    option2 = widget.question?.option2 ?? '';
+    option3 = widget.question?.option3 ?? '';
+    option4 = widget.question?.option4 ?? '';
+    answer = widget.question?.answer ?? '';
 
-  final textController = TextEditingController();
+
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
@@ -49,17 +58,30 @@ class _AddEditNotePageState extends State<AjouteQuestionPage> {
     ),
     body: Form(
       key: _formKey,
-      child: QuizFormWidget(
-        id: id,
-        name: name,
+      child: QuestionFormWidget(
+        question: question,
+        option1: option1,
+        option2: option2,
+        option3: option3,
+        option4: option4,
+        answer: answer,
+
+
         //onChangedId: (id) => setState(() => this.id = id),
-        onChangedName: (name) => setState(() => this.name = name),
+        onChangedQuestion: (question) => setState(() => this.question = question),
+        onChangedOption1: (option1) => setState(() => this.option1 = option1),
+        onChangedOption2: (option2) => setState(() => this.option2 = option2),
+        onChangedOption3: (option3) => setState(() => this.option3 = option3),
+        onChangedOption4: (option4) => setState(() => this.option4 = option4),
+        onChangedAnswer: (answer) => setState(() => this.answer = answer),
+
+
       ),
     ),
   );
 
   Widget buildButton() {
-    final isFormValid = name.isNotEmpty ;
+    final isFormValid = question.isNotEmpty ;
 
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -78,7 +100,7 @@ class _AddEditNotePageState extends State<AjouteQuestionPage> {
     final isValid = _formKey.currentState!.validate();
 
     if (isValid) {
-      final isUpdating = widget.quiz != null;
+      final isUpdating = widget.question != null;
 
       if (isUpdating) {
         await updateQuestion();
@@ -91,22 +113,31 @@ class _AddEditNotePageState extends State<AjouteQuestionPage> {
   }
 
   Future updateQuestion() async {
-    final question = widget.quiz!.copy(
+    final question1 = widget.question!.copy(
 
-      id: id,
-      name: name,
+      question: question,
+      option1: option1,
+      option2: option2,
+      option3: option3,
+      option4: option4,
+      answer: answer,
+
     );
 
-    await QuizDatabase.instance.update(question);
+    await QuestionDatabase.instance.update(question1);
   }
 
   Future addQuestion() async {
-    final question = Quiz(
-      name: name,
-      id: id,
+    final question1 = Question(
+      question: question,
+      option1: option1,
+      option2: option2,
+      option3: option3,
+      option4: option4,
+      answer: answer,
 
     );
 
-    await QuizDatabase.instance.create(question);
+    await QuestionDatabase.instance.create(question1);
   }
 }

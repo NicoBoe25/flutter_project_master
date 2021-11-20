@@ -8,18 +8,43 @@ import 'package:flutter/material.dart';
 
 import 'package:flutter/material.dart';
 
-class QuizFormWidget extends StatelessWidget {
-  final int? id;
-  final String? name;
-  // final ValueChanged<int> onChangedId;
-  final ValueChanged<String> onChangedName;
+class QuestionFormWidget extends StatelessWidget {
 
-  const QuizFormWidget({
+  final String? question;
+  final String? option1;
+  final String? option2;
+  final String? option3;
+  final String? option4;
+  final String? answer;
+
+
+  // final ValueChanged<int> onChangedId;
+  final ValueChanged<String> onChangedQuestion;
+  final ValueChanged<String> onChangedOption1;
+  final ValueChanged<String> onChangedOption2;
+  final ValueChanged<String> onChangedOption3;
+  final ValueChanged<String> onChangedOption4;
+  final ValueChanged<String> onChangedAnswer;
+
+
+  const QuestionFormWidget({
     Key? key,
-    this.id = 0,
-    this.name = '',
+    this.question = '',
+    this.option1 = '',
+    this.option2 = '',
+    this.option3 = '',
+    this.option4 = '',
+    this.answer = '',
+
     //required this.onChangedId,
-    required this.onChangedName,
+    required this.onChangedQuestion,
+    required this.onChangedOption1,
+    required this.onChangedOption2,
+    required this.onChangedOption3,
+    required this.onChangedOption4,
+    required this.onChangedAnswer,
+
+
   }) : super(key: key);
 
 
@@ -49,7 +74,7 @@ class QuizFormWidget extends StatelessWidget {
                             ),
                             validator: (title) =>
                             title != null && title.isEmpty ? 'veuillez saisir une question ' : null,
-                            onChanged: onChangedName,
+                            onChanged: onChangedQuestion,
                           ),
                           TextFormField(
                             decoration: InputDecoration(
@@ -60,7 +85,7 @@ class QuizFormWidget extends StatelessWidget {
                             ),
                             validator: (title) =>
                             title != null && title.isEmpty ? 'veuillez saisir une option ' : null,
-                            onChanged: onChangedName,
+                            onChanged: onChangedOption1,
                           ),
                           TextFormField(
                             decoration: InputDecoration(
@@ -71,7 +96,7 @@ class QuizFormWidget extends StatelessWidget {
                             ),
                             validator: (title) =>
                             title != null && title.isEmpty ? 'veuillez saisir une deuxième  option ' : null,
-                            onChanged: onChangedName,
+                            onChanged: onChangedOption2,
                           ),
                           TextFormField(
                             decoration: InputDecoration(
@@ -98,7 +123,7 @@ class QuizFormWidget extends StatelessWidget {
                             ),
                             validator: (title) =>
                             title != null && title.isEmpty ? 'veuillez saisir une answer ' : null,
-                            onChanged: onChangedName,
+                            onChanged: onChangedAnswer,
                           ),
 
                         ])
