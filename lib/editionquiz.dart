@@ -87,27 +87,27 @@ class _QuizesPageState extends State<EditionQuiz> {
   );
 
   Widget buildQuiz() => StaggeredGridView.countBuilder(
-    padding: EdgeInsets.all(8),
-    itemCount: quizes.length,
-    staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-    crossAxisCount: 4,
-    mainAxisSpacing: 4,
-    crossAxisSpacing: 4,
-    itemBuilder: (context, index) {
-      final quiz = quizes[index];
+      padding: EdgeInsets.all(8),
+      itemCount: quizes.length,
+      staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+      crossAxisCount: 4,
+      mainAxisSpacing: 4,
+      crossAxisSpacing: 4,
+      itemBuilder: (context, index) {
+        final quiz = quizes[index];
 
-      return GestureDetector(
-        onTap: () async {
-          await Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => DetailQuiz( quizId : quiz.id!)
-          ));
+        return GestureDetector(
+          onTap: () async {
+            await Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => DetailQuiz( quizId : quiz.id!)
+            ));
 
-          refreshQuizes();
-        },
-        child: QuizCardWidget(quiz: quiz, index: index),
+            refreshQuizes();
+          },
+          child: QuizCardWidget(quiz: quiz, index: index),
 
-      );
-    }
+        );
+      }
   );
 /*Widget buildNotes() => ListeView.countBuilder(
     padding: EdgeInsets.all(8),
@@ -118,13 +118,11 @@ class _QuizesPageState extends State<EditionQuiz> {
     crossAxisSpacing: 4,
     itemBuilder: (context, index) {
       final note = notes[index];
-
       return GestureDetector(
         onTap: () async {
           await Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => NoteDetailPage(noteId: note.id!),
           ));
-
           refreshNotes();
         },
         child: NoteCardWidget(note: note, index: index),
@@ -149,9 +147,7 @@ class _QuizesPageState extends State<EditionQuiz> {
 /*import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-
 import 'classObject/quiz.dart';
-
 class EditionQuiz extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -160,7 +156,6 @@ class EditionQuiz extends StatefulWidget {
 }
 class PlayEditionQuiz extends State<EditionQuiz> {
   List<Quiz> list_quizes = List<Quiz>.filled(0,Quiz(0,"test"),growable: true);
-
   void _removeQuiz(int index) {
     setState(() {
       list_quizes.remove(index);
@@ -169,31 +164,25 @@ class PlayEditionQuiz extends State<EditionQuiz> {
   void _cancelDeleteQuiz(Quiz item){
     addNewQuiz(item.name);
   }
-
   void addNewQuiz(String s) {
     setState(() {
       list_quizes.add(Quiz(list_quizes.length,s));
     });
   }
-
   int launchAddFonction(){
     list_quizes.add(Quiz(1, "test1"));
     list_quizes.add(Quiz(2, "test2"));
     list_quizes.add(Quiz(3, "test3"));
     return list_quizes.length;
   }
-
-
   Widget build(BuildContext ctx){
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quizes'),
       ),
       body:ListView.builder(
-
           itemCount: launchAddFonction(),
           itemBuilder: (BuildContext context, int index) {
-
             final item = list_quizes[index];
             return Dismissible(
                 key: Key(item.name),

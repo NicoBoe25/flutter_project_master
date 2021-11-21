@@ -58,13 +58,6 @@ class QuestionFormWidget extends StatelessWidget {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Spacer(flex: 2), //2/6
-                          Text(
-                            "Let's creat a Quiz,",
-
-                          ),
-                          Text("Enter a name for the  quiz "),
-                          Spacer(), // 1/6
                           TextFormField(
                             decoration: InputDecoration(
                               hintText: "Question",
@@ -137,56 +130,5 @@ class QuestionFormWidget extends StatelessWidget {
 
 
 }
-
-/*TextFormField(
-    decoration: InputDecoration(
-    hintText: "option1",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(12)),
-    ),
-    ),
-    validator: (title) =>
-    title != null && title.isEmpty ? 'veuillez saisir une première option' : null,
-    onChanged: onChangedName,
-    ),
-    TextFormField(
-    decoration: InputDecoration(
-    hintText: "option2",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(12)),
-    ),
-    ),
-    validator: (title) =>
-    title != null && title.isEmpty ? 'veuillez saisir une deuxième option' : null,
-    onChanged: onChangedName,
-    ),
-    TextFormField(
-    decoration: InputDecoration(
-    hintText: "option3",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(12)),
-    ),
-    ),
-    ),
-    TextFormField(
-    decoration: InputDecoration(
-    hintText: "option4",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(12)),
-    ),
-    ),
-    ),
-    TextFormField(
-    decoration: InputDecoration(
-    hintText: "answer",
-    border: OutlineInputBorder(
-    borderRadius: BorderRadius.all(Radius.circular(12)),
-    ),
-    ),
-    validator: (title) =>
-    title != null && title.isEmpty ? 'veuillez saisir une answer' : null,
-    onChanged: onChangedName,
-    ),*/
-
 
 

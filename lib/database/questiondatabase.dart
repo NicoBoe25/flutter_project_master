@@ -4,33 +4,27 @@ import 'package:path/path.dart';
 
 
 class QuestionDatabase{
-  static final QuestionDatabase instance = QuestionDatabase._init();
+  QuestionDatabase._privateConstructor();
+  static final QuestionDatabase instance = QuestionDatabase._privateConstructor();
 
   static Database? _database;
 
-  QuestionDatabase._init();
+  Future<Database> get database async => _database ??= await _initDatabase('questions.db');
 
-  Future<Database> get database async{
-    if( _database != null) return _database!;
-
-    _database = await _initDB('question.db');
-    return _database!;
-  }
-
-
-  Future<Database> _initDB(String filepath) async {
-    final dbpath = await getDatabasesPath();
-
-    final path = join(dbpath,filepath);
-
-    return await openDatabase(path,version: 1, onCreate: _createDB);
+  Future<Database> _initDatabase(String filePath) async {
+    final dbPath = await getDatabasesPath();
+    final path = join(dbPath, filePath);
+    return await openDatabase(
+      path,
+      version: 1,
+      onCreate: _createDB,
+    );
   }
 
   Future _createDB(Database db, int version) async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     final textType = 'TEXT';
 
-    final intKeyForeign = 'INTEGER FOREIGN KEY';
 
     await db.execute('''
     CREATE TABLE $tableQuestions (
@@ -55,12 +49,12 @@ class QuestionDatabase{
     return question.copy(id: id);
   }
 
-  Future<Question?> readQuestion(int idQuestion) async {
+  Future<Question> readQuestion(int idQuestion) async {
     final db = await instance.database;
 
     final maps = await db.query(
-        tableQuestions,
-        columns: QuestionFields.values,
+      tableQuestions,
+      columns: QuestionFields.values,
       where: '${QuestionFields.id} = ?',
       whereArgs: [idQuestion],
     );
@@ -113,13 +107,13 @@ class QuestionDatabase{
     final db = await instance.database;
 
     return await db.delete(
-      tableQuestions,
+        tableQuestions,
         where: '${QuestionFields.id} = ?',
         whereArgs: [id]
     );
   }
 
-    Future close() async {
+  Future close() async {
     final db = await instance.database;
     db.close();
   }

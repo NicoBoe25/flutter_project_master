@@ -1,15 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_master/database/quizdatabase.dart';
 import 'package:flutter_project_master/database/questiondatabase.dart';
-
 import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:flutter_project_master/classObject/question.dart';
-
 import 'package:flutter_project_master/questionswid.dart';
-//import 'package:sqflite_database_example/widget/note_form_widget.dart';
 
-import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
 class AjouterQuestionPage extends StatefulWidget {
   final Question? question;
   final Quiz? quiz;
@@ -21,13 +15,13 @@ class AjouterQuestionPage extends StatefulWidget {
     this.quiz,
   }) : super(key: key);
   @override
-  _AddEditNotePageState createState() => _AddEditNotePageState();
+  _AddEditQuestionPageState createState() => _AddEditQuestionPageState();
 }
 
-class _AddEditNotePageState extends State<AjouterQuestionPage> {
+class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
   final _formKey = GlobalKey<FormState>();
 
-  late int id;
+  //late int id;
   late String question;
   late String option1;
   late String option2;
@@ -40,7 +34,7 @@ class _AddEditNotePageState extends State<AjouterQuestionPage> {
   @override
   void initState() {
     super.initState();
-    id = widget.quiz?.id ?? 0;
+  //  id = widget.quiz?.id ?? 0;
     question = widget.question?.question ?? '';
     option1 = widget.question?.option1 ?? '';
     option2 = widget.question?.option2 ?? '';
@@ -120,7 +114,7 @@ class _AddEditNotePageState extends State<AjouterQuestionPage> {
       option2: option2,
       option3: option3,
       option4: option4,
-      answer: answer,
+      answer: answer
 
     );
 
@@ -134,7 +128,7 @@ class _AddEditNotePageState extends State<AjouterQuestionPage> {
       option2: option2,
       option3: option3,
       option4: option4,
-      answer: answer,
+      answer: answer
 
     );
 

@@ -55,22 +55,22 @@ class _AjouteQestionPageState extends State<DetailQuiz> {
 
 
   Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      title: Text(
-        'Questions',
-        style: TextStyle(fontSize: 24),
+      appBar: AppBar(
+        title: Text(
+          'Questions',
+          style: TextStyle(fontSize: 24),
+        ),
       ),
-    ),
-    body: Center(
-      child: isLoading
-          ? CircularProgressIndicator()
-          : listequestion.isEmpty
-          ? Text(
-        'No Questions',
-        style: TextStyle(color: Colors.white, fontSize: 24),
-      )
-          : buildQuestion(),
-    ),
+      body: Center(
+        child: isLoading
+            ? CircularProgressIndicator()
+            : listequestion.isEmpty
+            ? Text(
+          'No Questions',
+          style: TextStyle(color: Colors.white, fontSize: 24),
+        )
+            : buildQuestion(),
+      ),
       floatingActionButton: FloatingActionButton(
         backgroundColor: Colors.black,
         child: Icon(Icons.add),
@@ -84,23 +84,19 @@ class _AjouteQestionPageState extends State<DetailQuiz> {
       )
   );
 
- /* Widget editButton() => IconButton(
+  /* Widget editButton() => IconButton(
       icon: Icon(Icons.edit_outlined),
       onPressed: () async {
         if (isLoading) return;
-
         await Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => AjouterQuestionPage(quiz: quiz),
         ));
-
         refreshQuiz();
       });
-
   Widget deleteButton() => IconButton(
     icon: Icon(Icons.delete),
     onPressed: () async {
       await QuizDatabase.instance.delete(widget.quizId);
-
       Navigator.of(context).pop();
     },
   );*/
@@ -121,29 +117,7 @@ class _AjouteQestionPageState extends State<DetailQuiz> {
         );
       }
   );
-  /*Widget build(BuildContext context) => Scaffold(
-    appBar: AppBar(
-      actions: [editButton(), deleteButton()],
-    ),
-    body: isLoading
-        ? Center(child: CircularProgressIndicator())
-        : Padding(
-      padding: EdgeInsets.all(12),
-      child: ListView(
-        padding: EdgeInsets.symmetric(vertical: 8),
-        children: [
-          Text(
-            quiz.name,
-            style: TextStyle(
-              color: Colors.white,
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-            ),
-          )
-        ],
-      ),
-    ),
-  );*/
+
 
 
 }
