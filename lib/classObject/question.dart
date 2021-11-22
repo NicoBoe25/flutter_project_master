@@ -3,7 +3,7 @@ final String tableQuestions = 'questions';
 class QuestionFields{
   static final List<String> values = [
     /// Add all fields
-    id, question, option1 , option2, option3,option4,answer
+    id, question, option1 , option2, option3,option4,answer,idQuiz
   ];
 
   static final String id = '_id';
@@ -13,6 +13,7 @@ class QuestionFields{
   static final String option3 = 'option3';
   static final String option4 = 'option4';
   static final String answer = 'answer';
+  static final String idQuiz = 'idQuiz';
 
 
 
@@ -26,6 +27,7 @@ class Question {
   final String? option3;
   final String? option4;
   final String answer;
+  final int? idQuiz;
 
 
 
@@ -36,7 +38,8 @@ class Question {
     required this.option2,
     this.option3,
     this.option4,
-    required this.answer
+    required this.answer,
+    this.idQuiz
 
 
   });
@@ -48,7 +51,8 @@ class Question {
     String? option2,
     String? option3,
     String? option4,
-    String? answer
+    String? answer,
+    int? idQuiz
 
 
 
@@ -57,10 +61,11 @@ class Question {
         id: id ?? this.id,
         question: question ?? this.question,
         option1: option1 ?? this.option1,
-        option2: option1 ?? this.option2,
-        option3: option1 ?? this.option3,
-        option4: option1 ?? this.option4,
-        answer: option1 ?? this.answer
+        option2: option2 ?? this.option2,
+        option3: option3 ?? this.option3,
+        option4: option4 ?? this.option4,
+        answer: answer ?? this.answer,
+        idQuiz: idQuiz ?? this.idQuiz
 
       );
 
@@ -69,11 +74,10 @@ class Question {
       question: json[QuestionFields.question]as String,
       option1: json[QuestionFields.option1]as String,
       option2: json[QuestionFields.option2]as String,
-      option3: json[QuestionFields.option3]as String,
-      option4: json[QuestionFields.option4]as String,
-      answer: json[QuestionFields.answer]as String
-
-
+      option3: json[QuestionFields.option3]as String?,
+      option4: json[QuestionFields.option4]as String?,
+      answer: json[QuestionFields.answer]as String,
+      idQuiz: json[QuestionFields.idQuiz]as int?
   );
 
   Map<String, Object?> toJson() => {
@@ -83,9 +87,7 @@ class Question {
     QuestionFields.option2: option2,
     QuestionFields.option3: option3,
     QuestionFields.option4: option4,
-    QuestionFields.answer: answer
-
-
-
+    QuestionFields.answer: answer,
+    QuestionFields.idQuiz: idQuiz
   };
 }

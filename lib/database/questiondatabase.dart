@@ -24,7 +24,7 @@ class QuestionDatabase{
   Future _createDB(Database db, int version) async {
     final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     final textType = 'TEXT';
-
+    final intType = 'INTEGER';
 
     await db.execute('''
     CREATE TABLE $tableQuestions (
@@ -35,7 +35,8 @@ class QuestionDatabase{
     ${QuestionFields.option2} $textType,
     ${QuestionFields.option3} $textType,
     ${QuestionFields.option4} $textType,
-    ${QuestionFields.answer} $textType
+    ${QuestionFields.answer} $textType,
+    ${QuestionFields.idQuiz} $intType
     
     )
     ''');
@@ -81,7 +82,7 @@ class QuestionDatabase{
     final maps = await db.query(
       tableQuestions,
       columns: QuestionFields.values,
-      where: '${QuestionFields.id} = ?',
+      where: '${QuestionFields.idQuiz} = ?',
       whereArgs: [idquiz],
     );
     if(maps.isNotEmpty){
