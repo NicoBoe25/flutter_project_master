@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -13,6 +14,8 @@ import 'package:flutter_project_master/quizcards.dart';
 import 'package:flutter_project_master/ajouterquestion.dart';
 import 'package:flutter_project_master/quizdetail.dart';
 
+import 'package:http/http.dart' as http;
+import 'package:xml/xml.dart';
 
 
 import 'ajouterquiz.dart';
@@ -36,6 +39,7 @@ class _QuizesPageState extends State<EditionQuiz> {
   void initState() {
     super.initState();
 
+    getWebXMLQuiz();
     refreshQuizes();
   }
 
@@ -54,6 +58,37 @@ class _QuizesPageState extends State<EditionQuiz> {
     setState(() => isLoading = false);
   }
 
+  Future getWebXMLQuiz() async {
+    List<Quiz> quizToAdd;
+    final url = Uri.parse(
+        'https://dept-info.univ-fcomte.fr/joomla/images/CR0700/Quizzs.xml');
+    var reponse = await http.get(url);
+    if (reponse.statusCode == 200) {
+      try{
+        await parseXMLToListQuiz(reponse);
+      }catch(Exception){
+        print("Error parse xml");
+    }
+    }else{
+      print("try again");
+    }
+  }
+
+  parseXMLToListQuiz(var reponse) async{
+    List<Quiz> test = [];
+    String source = Utf8Decoder().convert(reponse.bodyBytes);
+    var parse = XmlDocument.parse(source);
+    print("------------------------------------------");
+    var root = parse.rootElement;
+    if(root.name.toString()=="Quizzs"){
+      var listQuiz = root.findAllElements('Quizz');
+      for(var quizzzz in listQuiz){
+        print(quizzzz.attributes.first.value);
+      }
+
+    }
+
+  }
 
   @override
   Widget build(BuildContext context) => Scaffold(
