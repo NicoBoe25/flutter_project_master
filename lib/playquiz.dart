@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_project_master/passerquiz.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -85,7 +86,13 @@ class _NotesPageState extends State<Playquiz> {
         final quiz = quizes[index];
 
         return GestureDetector(
-          onTap: () {},
+          onTap: () async {
+            await Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => PasserQuiz( quizId : quiz.id!)
+            ));
+
+            refreshQuizes();
+          },
           child: QuizCardWidget(quiz: quiz, index: index),
 
         );

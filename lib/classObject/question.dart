@@ -3,7 +3,7 @@ final String tableQuestions = 'questions';
 class QuestionFields{
   static final List<String> values = [
     /// Add all fields
-    id, question, option1 , option2, option3,option4,answer
+    id, question, option1 , option2, option3,option4,answer , idquiz
   ];
 
   static final String id = '_id';
@@ -13,6 +13,8 @@ class QuestionFields{
   static final String option3 = 'option3';
   static final String option4 = 'option4';
   static final String answer = 'answer';
+  static final String idquiz = '_idquiz';
+
 
 
 
@@ -26,6 +28,9 @@ class Question {
   final String? option3;
   final String? option4;
   final String answer;
+  final int? idquiz;
+
+
 
 
 
@@ -36,7 +41,9 @@ class Question {
     required this.option2,
     this.option3,
     this.option4,
-    required this.answer
+    required this.answer,
+    this.idquiz,
+
 
 
   });
@@ -48,19 +55,23 @@ class Question {
     String? option2,
     String? option3,
     String? option4,
-    String? answer
+    String? answer,
+    int? idquiz,
+
 
 
 
   }) =>
       Question(
-        id: id ?? this.id,
-        question: question ?? this.question,
-        option1: option1 ?? this.option1,
-        option2: option1 ?? this.option2,
-        option3: option1 ?? this.option3,
-        option4: option1 ?? this.option4,
-        answer: option1 ?? this.answer
+          id: id ?? this.id,
+          question: question ?? this.question,
+          option1: option1 ?? this.option1,
+          option2: option1 ?? this.option2,
+          option3: option1 ?? this.option3,
+          option4: option1 ?? this.option4,
+          answer: option1 ?? this.answer,
+        idquiz: idquiz ?? this.idquiz,
+
 
       );
 
@@ -71,7 +82,9 @@ class Question {
       option2: json[QuestionFields.option2]as String,
       option3: json[QuestionFields.option3]as String,
       option4: json[QuestionFields.option4]as String,
-      answer: json[QuestionFields.answer]as String
+      answer: json[QuestionFields.answer]as String,
+    idquiz: json[QuestionFields.idquiz] as int?,
+
 
 
   );
@@ -83,7 +96,9 @@ class Question {
     QuestionFields.option2: option2,
     QuestionFields.option3: option3,
     QuestionFields.option4: option4,
-    QuestionFields.answer: answer
+    QuestionFields.answer: answer,
+    QuestionFields.idquiz: idquiz,
+
 
 
 

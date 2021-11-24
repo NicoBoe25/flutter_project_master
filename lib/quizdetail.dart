@@ -67,7 +67,7 @@ class _AjouteQestionPageState extends State<DetailQuiz> {
             : listequestion.isEmpty
             ? Text(
           'No Questions',
-          style: TextStyle(color: Colors.white, fontSize: 24),
+          style: TextStyle(color: Colors.blue, fontSize: 24),
         )
             : buildQuestion(),
       ),
@@ -76,7 +76,7 @@ class _AjouteQestionPageState extends State<DetailQuiz> {
         child: Icon(Icons.add),
         onPressed: () async {
           await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => AjouterQuestionPage()),
+            MaterialPageRoute(builder: (context) => AjouterQuestionPage(quizId: widget.quizId!)),
           );
 
           refreshQuiz();
@@ -111,6 +111,13 @@ class _AjouteQestionPageState extends State<DetailQuiz> {
         final questions = listequestion[index];
 
         return GestureDetector(
+         /*onTap: () async {
+            await Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => AjouterQuestionPage( quizId: widget.quizId)
+            ));
+
+            refreshQuiz();
+          },*/
 
           child: QuestionCardWidget(question: questions, index: index),
 

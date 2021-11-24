@@ -6,13 +6,18 @@ import 'package:flutter_project_master/questionswid.dart';
 
 class AjouterQuestionPage extends StatefulWidget {
   final Question? question;
-  final Quiz? quiz;
+  final int quizId;
+  //final Quiz? quiz;
+
 
 
   const AjouterQuestionPage({
     Key? key,
     this.question,
-    this.quiz,
+   // this.quiz,
+    required this.quizId,
+
+
   }) : super(key: key);
   @override
   _AddEditQuestionPageState createState() => _AddEditQuestionPageState();
@@ -28,19 +33,23 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
   late String option3;
   late String option4;
   late String answer;
+ late int idquiz;
+
 
 
 
   @override
   void initState() {
     super.initState();
-  //  id = widget.quiz?.id ?? 0;
+    //  id = widget.quiz?.id ?? 0;
     question = widget.question?.question ?? '';
     option1 = widget.question?.option1 ?? '';
     option2 = widget.question?.option2 ?? '';
     option3 = widget.question?.option3 ?? '';
     option4 = widget.question?.option4 ?? '';
     answer = widget.question?.answer ?? '';
+    idquiz = widget.question?.idquiz ?? widget.quizId;
+
 
 
   }
@@ -109,12 +118,15 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
   Future updateQuestion() async {
     final question1 = widget.question!.copy(
 
-      question: question,
-      option1: option1,
-      option2: option2,
-      option3: option3,
-      option4: option4,
-      answer: answer
+        question: question,
+        option1: option1,
+        option2: option2,
+        option3: option3,
+        option4: option4,
+        answer: answer,
+        idquiz: widget.quizId
+
+
 
     );
 
@@ -123,12 +135,13 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
 
   Future addQuestion() async {
     final question1 = Question(
-      question: question,
-      option1: option1,
-      option2: option2,
-      option3: option3,
-      option4: option4,
-      answer: answer
+        question: question,
+        option1: option1,
+        option2: option2,
+        option3: option3,
+        option4: option4,
+        answer: answer,
+        idquiz: widget.quizId
 
     );
 

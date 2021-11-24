@@ -1,4 +1,5 @@
 import 'package:flutter_project_master/classObject/question.dart';
+import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -26,6 +27,7 @@ class QuestionDatabase{
     final textType = 'TEXT';
 
 
+
     await db.execute('''
     CREATE TABLE $tableQuestions (
   
@@ -35,7 +37,10 @@ class QuestionDatabase{
     ${QuestionFields.option2} $textType,
     ${QuestionFields.option3} $textType,
     ${QuestionFields.option4} $textType,
-    ${QuestionFields.answer} $textType
+    ${QuestionFields.answer} $textType,
+    ${QuestionFields.idquiz}  ,
+    FOREIGN KEY (${QuestionFields.idquiz}) REFERENCES $tableQuizs (${QuizFields.id}) ON DELETE CASCADE
+
     
     )
     ''');
@@ -81,8 +86,11 @@ class QuestionDatabase{
     final maps = await db.query(
       tableQuestions,
       columns: QuestionFields.values,
-      where: '${QuestionFields.id} = ?',
+      where: '${QuestionFields.idquiz} = ?',
       whereArgs: [idquiz],
+     // where: '${QuestionFields.idquiz} = $idquiz ',
+      //whereArgs: [idquiz],
+
     );
     if(maps.isNotEmpty){
       return maps.map((json) => Question.fromJson(json)).toList();
