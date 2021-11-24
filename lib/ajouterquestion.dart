@@ -124,7 +124,7 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
         option3: option3,
         option4: option4,
         answer: answer,
-        idquiz: widget.quizId
+        //idquiz: widget.quizId
 
 
 

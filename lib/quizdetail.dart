@@ -111,13 +111,16 @@ class _AjouteQestionPageState extends State<DetailQuiz> {
         final questions = listequestion[index];
 
         return GestureDetector(
-         /*onTap: () async {
+
+          onTap: () async {
+            if (isLoading) return;
+
             await Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => AjouterQuestionPage( quizId: widget.quizId)
+                builder: (context) => AjouterQuestionPage( quizId: widget.quizId! ,question: questions)
             ));
 
             refreshQuiz();
-          },*/
+          },
 
           child: QuestionCardWidget(question: questions, index: index),
 
