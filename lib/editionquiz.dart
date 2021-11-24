@@ -76,14 +76,37 @@ class _QuizesPageState extends State<EditionQuiz> {
 
   parseXMLToListQuiz(var reponse) async{
     List<Quiz> test = [];
+    List<String> testStr = [];
+    int inc = 0;
     String source = Utf8Decoder().convert(reponse.bodyBytes);
     var parse = XmlDocument.parse(source);
     print("------------------------------------------");
     var root = parse.rootElement;
     if(root.name.toString()=="Quizzs"){
       var listQuiz = root.findAllElements('Quizz');
-      for(var quizzzz in listQuiz){
-        print(quizzzz.attributes.first.value);
+      //Boucle des Quiz
+      for(var quiz in listQuiz){
+        test.add(Quiz(name: quiz.attributes.first.value.toString()));
+        var listQuestion = root.findAllElements('Question');
+        //Boucle des Questions
+        for(var question in listQuestion){
+          String strQuestion = question.children.first.toString();
+          var nodePropositions = question.getElement('Propositions');
+          var nodeNombrePropo = nodePropositions!.getElement('Nombre');
+
+          var nbReponse = int.parse(nodeNombrePropo!.attributes.first.value);
+
+          print(nbReponse);
+          var listXMLProposition = nodePropositions.children;
+          List<String> listStrPropositions = [];
+
+          //Boucle des propositions
+          // for(var proposition in listXMLProposition){
+          //   listStrPropositions.add(proposition.children.first.toString());
+          // }
+          //print(listStrPropositions);
+
+        }
       }
 
     }
