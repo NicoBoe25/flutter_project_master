@@ -1,17 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:flutter_project_master/database/quizdatabase.dart';
 import 'package:flutter_project_master/ajouterquiz.dart';
 import 'package:flutter_project_master/quizcards.dart';
-import 'package:flutter_project_master/ajouterquestion.dart';
 import 'package:flutter_project_master/quizdetail.dart';
 
 import 'package:http/http.dart' as http;
@@ -20,12 +14,13 @@ import 'package:xml/xml.dart';
 
 import 'ajouterquiz.dart';
 import 'classObject/question.dart';
-import 'quizwid.dart';
 
 
 
 
 class EditionQuiz extends StatefulWidget {
+  const EditionQuiz({Key? key}) : super(key: key);
+
   @override
   _QuizesPageState createState() => _QuizesPageState();
 }
@@ -54,20 +49,19 @@ class _QuizesPageState extends State<EditionQuiz> {
   Future refreshQuizes() async {
     setState(() => isLoading = true);
 
-    this.quizes = await QuizDatabase.instance.readAllQuizes();
+    quizes = await QuizDatabase.instance.readAllQuizes();
 
     setState(() => isLoading = false);
   }
 
   Future getWebXMLQuiz() async {
-    List<Quiz> quizToAdd;
     final url = Uri.parse(
         'https://dept-info.univ-fcomte.fr/joomla/images/CR0700/Quizzs.xml');
     var reponse = await http.get(url);
     if (reponse.statusCode == 200) {
       try{
         await parseXMLToListQuiz(reponse);
-      }catch(Exception){
+      }on Exception{
         print("Error parse xml");
     }
     }else{
@@ -148,8 +142,6 @@ class _QuizesPageState extends State<EditionQuiz> {
       listQuizFinale.add(Quiz(id: incrementQuiz,name: quiz.attributes.first.value.toString()));
       incrementQuiz++;
     }
-    print(incrementQuiz);
-    print(incrementQuestion);
   }
 
 

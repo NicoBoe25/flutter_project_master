@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/database/questiondatabase.dart';
-import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:flutter_project_master/classObject/question.dart';
 import 'package:flutter_project_master/questionswid.dart';
 

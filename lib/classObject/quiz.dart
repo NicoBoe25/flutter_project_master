@@ -1,4 +1,4 @@
-final String tableQuizs = 'quizes';
+const String tableQuizs = 'quizes';
 
 class QuizFields {
   static final List<String> values = [
@@ -6,8 +6,8 @@ class QuizFields {
     id, name
   ];
 
-  static final String id = '_id';
-  static final String name = 'name';
+  static const String id = '_id';
+  static const String name = 'name';
 
 
 }

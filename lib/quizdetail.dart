@@ -1,13 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/questioncard.dart';
-import 'package:flutter_project_master/quizcards.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_project_master/database/quizdatabase.dart';
 import 'package:flutter_project_master/database/questiondatabase.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:flutter_project_master/classObject/question.dart';
-import 'package:flutter_project_master/ajouterquiz.dart';
 
 import 'ajouterquestion.dart';
 
@@ -46,7 +42,7 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
   Future refreshQuiz() async {
     setState(() => isLoading = true);
 
-    this.listequestion = await QuestionDatabase.instance.readAllQuestionFromQuizId(widget.quizId);
+    listequestion = await QuestionDatabase.instance.readAllQuestionFromQuizId(widget.quizId);
 
     setState(() => isLoading = false);
   }
@@ -76,7 +72,7 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
         child: Icon(Icons.add),
         onPressed: () async {
           await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => AjouterQuestionPage(quizId: widget.quizId!)),
+            MaterialPageRoute(builder: (context) => AjouterQuestionPage(quizId: widget.quizId)),
           );
 
           refreshQuiz();
@@ -116,7 +112,7 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
             if (isLoading) return;
 
             await Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => AjouterQuestionPage( quizId: widget.quizId! ,question: questions)
+                builder: (context) => AjouterQuestionPage( quizId: widget.quizId ,question: questions)
             ));
 
             refreshQuiz();

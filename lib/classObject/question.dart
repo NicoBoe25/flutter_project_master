@@ -1,4 +1,4 @@
-final String tableQuestions = 'questions';
+const String tableQuestions = 'questions';
 
 class QuestionFields{
   static final List<String> values = [
@@ -6,14 +6,14 @@ class QuestionFields{
     id, question, option1 , option2, option3,option4,answer , idquiz
   ];
 
-  static final String id = '_id';
-  static final String question = 'question';
-  static final String option1 = 'option1';
-  static final String option2 = 'option2';
-  static final String option3 = 'option3';
-  static final String option4 = 'option4';
-  static final String answer = 'answer';
-  static final String idquiz = '_idquiz';
+  static const String id = '_id';
+  static const String question = 'question';
+  static const String option1 = 'option1';
+  static const String option2 = 'option2';
+  static const String option3 = 'option3';
+  static const String option4 = 'option4';
+  static const String answer = 'answer';
+  static const String idquiz = '_idquiz';
 
 
 

@@ -1,10 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_project_master/database/questionDatabase.dart';
-import 'package:flutter_project_master/database/quizDatabase.dart';
 import 'package:flutter_project_master/playquiz.dart';
-
-
-import 'classObject/quiz.dart';
 import 'editionquiz.dart';
 
 void main() {
@@ -60,13 +55,13 @@ class _AllMyQuizs extends State<MyQuizs> {
 
   void startQuiz(){
     setState(() {
-      Navigator.push(context, new MaterialPageRoute(builder: (context)=> new Playquiz()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> Playquiz()));
     });
   }
 
   void startEditionQuiz(){
     setState(() {
-      Navigator.push(context, new MaterialPageRoute(builder: (context)=> new EditionQuiz()));
+      Navigator.push(context, MaterialPageRoute(builder: (context)=> EditionQuiz()));
     });
   }
 }
