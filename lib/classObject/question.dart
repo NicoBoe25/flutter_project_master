@@ -63,26 +63,26 @@ class Question {
 
   }) =>
       Question(
-          id: id ?? this.id,
-          question: question ?? this.question,
-          option1: option1 ?? this.option1,
-          option2: option1 ?? this.option2,
-          option3: option1 ?? this.option3,
-          option4: option1 ?? this.option4,
-          answer: option1 ?? this.answer,
+        id: id ?? this.id,
+        question: question ?? this.question,
+        option1: option1 ?? this.option1,
+        option2: option1 ?? this.option2,
+        option3: option1 ?? this.option3,
+        option4: option1 ?? this.option4,
+        answer: option1 ?? this.answer,
         idquiz: idquiz ?? this.idquiz,
 
 
       );
 
   static Question fromJson(Map<String, Object?> json) => Question(
-      id: json[QuestionFields.id] as int?,
-      question: json[QuestionFields.question]as String,
-      option1: json[QuestionFields.option1]as String,
-      option2: json[QuestionFields.option2]as String,
-      option3: json[QuestionFields.option3]as String,
-      option4: json[QuestionFields.option4]as String,
-      answer: json[QuestionFields.answer]as String,
+    id: json[QuestionFields.id] as int?,
+    question: json[QuestionFields.question]as String,
+    option1: json[QuestionFields.option1]as String,
+    option2: json[QuestionFields.option2]as String,
+    option3: json[QuestionFields.option3]as String,
+    option4: json[QuestionFields.option4]as String,
+    answer: json[QuestionFields.answer]as String,
     idquiz: json[QuestionFields.idquiz] as int?,
 
 

@@ -88,7 +88,7 @@ class QuestionDatabase{
       columns: QuestionFields.values,
       where: '${QuestionFields.idquiz} = ?',
       whereArgs: [idquiz],
-     // where: '${QuestionFields.idquiz} = $idquiz ',
+      // where: '${QuestionFields.idquiz} = $idquiz ',
       //whereArgs: [idquiz],
 
     );

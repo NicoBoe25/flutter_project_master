@@ -116,7 +116,7 @@ class _QuizesPageState extends State<EditionQuiz> {
           case 3:
             listQuestionFinale.add(Question(
                     id: incrementQuestion,
-                    idQuiz: incrementQuiz,
+                    idquiz: incrementQuiz,
                     question: strQuestion,
                     option1: listStrPropositions[0],
                     option2: listStrPropositions[1],
@@ -126,7 +126,7 @@ class _QuizesPageState extends State<EditionQuiz> {
           case 4:
             listQuestionFinale.add(Question(
                 id: incrementQuestion,
-                idQuiz: incrementQuiz,
+                idquiz: incrementQuiz,
                 question: strQuestion,
                 option1: listStrPropositions[0],
                 option2: listStrPropositions[1],
@@ -137,7 +137,7 @@ class _QuizesPageState extends State<EditionQuiz> {
           default:
             listQuestionFinale.add(Question(
                 id: incrementQuestion,
-                idQuiz: incrementQuiz,
+                idquiz: incrementQuiz,
                 question: strQuestion,
                 option1: listStrPropositions[0],
                 option2: listStrPropositions[1],
@@ -151,6 +151,7 @@ class _QuizesPageState extends State<EditionQuiz> {
     print(incrementQuiz);
     print(incrementQuestion);
   }
+
 
 
   @override
@@ -207,4 +208,5 @@ class _QuizesPageState extends State<EditionQuiz> {
         );
       }
   );
+
 }
