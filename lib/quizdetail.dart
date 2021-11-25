@@ -21,10 +21,10 @@ class DetailQuiz extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _AjouteQestionPageState createState() => _AjouteQestionPageState();
+  _AjouteQuestionPageState createState() => _AjouteQuestionPageState();
 }
 
-class _AjouteQestionPageState extends State<DetailQuiz> {
+class _AjouteQuestionPageState extends State<DetailQuiz> {
   late Quiz quiz;
   late Question question;
   late List<Question> listequestion ;

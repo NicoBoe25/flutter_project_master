@@ -27,15 +27,7 @@ class MyQuizs extends StatefulWidget {
     return _AllMyQuizs();
 
   }
-/* void initBaseDiDonne(){
-    var idbquiz = QuizDatabase.instance;
-    var dbQyiz = idbquiz.database;
-    var dbQuestion = QuestionDatabase.instance.database;
-    var _quiz1 =  Quiz(1 , "premier quiz");
-    var _quiz2 = Quiz(2 , "deuxieme quiz");
-    idbquiz.create(_quiz1);
-    idbquiz.create(_quiz2);
-  }*/
+
 }
 class _AllMyQuizs extends State<MyQuizs> {
 

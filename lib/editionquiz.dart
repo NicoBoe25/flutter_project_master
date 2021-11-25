@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
@@ -13,9 +14,12 @@ import 'package:flutter_project_master/quizcards.dart';
 import 'package:flutter_project_master/ajouterquestion.dart';
 import 'package:flutter_project_master/quizdetail.dart';
 
+import 'package:http/http.dart' as http;
+import 'package:xml/xml.dart';
 
 
 import 'ajouterquiz.dart';
+import 'classObject/question.dart';
 import 'quizwid.dart';
 
 
@@ -36,6 +40,7 @@ class _QuizesPageState extends State<EditionQuiz> {
   void initState() {
     super.initState();
 
+    getWebXMLQuiz();
     refreshQuizes();
   }
 
@@ -52,6 +57,99 @@ class _QuizesPageState extends State<EditionQuiz> {
     this.quizes = await QuizDatabase.instance.readAllQuizes();
 
     setState(() => isLoading = false);
+  }
+
+  Future getWebXMLQuiz() async {
+    List<Quiz> quizToAdd;
+    final url = Uri.parse(
+        'https://dept-info.univ-fcomte.fr/joomla/images/CR0700/Quizzs.xml');
+    var reponse = await http.get(url);
+    if (reponse.statusCode == 200) {
+      try{
+        await parseXMLToListQuiz(reponse);
+      }catch(Exception){
+        print("Error parse xml");
+    }
+    }else{
+      print("try again");
+    }
+  }
+
+  parseXMLToListQuiz(var reponse) async{
+    List<Quiz> listQuizFinale = [];
+    List<Question> listQuestionFinale = [];
+    int incrementQuestion = 0;
+    int incrementQuiz = 0;
+    String source = Utf8Decoder().convert(reponse.bodyBytes);
+    var parse = XmlDocument.parse(source);
+    print("------------------------------------------");
+
+    var listQuiz = parse.findAllElements('Quizz');
+
+    //Boucle des Quiz
+    for(var quiz in listQuiz){
+      var listQuestion = quiz.findAllElements('Question');
+
+      //Boucle des Questions
+      for(var question in listQuestion){
+        String strQuestion = question.children.first.toString();
+        var nodePropositions = question.getElement('Propositions');
+        var nodeNombrePropo = nodePropositions!.getElement('Nombre');
+
+        var nbReponse = int.parse(nodeNombrePropo!.attributes.first.value);
+
+        List<String> listStrPropositions = [];
+
+        //Boucle des propositions
+        for(var propos in nodePropositions.findAllElements('Proposition') ){
+          listStrPropositions.add(propos.text);
+        }
+
+        var nodeAnswer = question.getElement('Reponse');
+
+        var idAnswer = int.parse(nodeAnswer!.attributes.first.value);
+
+        //TODO: A Changer si on passe d'une String à un int
+        var answer = listStrPropositions[idAnswer-1];
+
+        switch(nbReponse){
+          case 3:
+            listQuestionFinale.add(Question(
+                    id: incrementQuestion,
+                    idQuiz: incrementQuiz,
+                    question: strQuestion,
+                    option1: listStrPropositions[0],
+                    option2: listStrPropositions[1],
+                    option3: listStrPropositions[2],
+                    answer: answer));
+            break;
+          case 4:
+            listQuestionFinale.add(Question(
+                id: incrementQuestion,
+                idQuiz: incrementQuiz,
+                question: strQuestion,
+                option1: listStrPropositions[0],
+                option2: listStrPropositions[1],
+                option3: listStrPropositions[2],
+                option4: listStrPropositions[3],
+                answer: answer));
+            break;
+          default:
+            listQuestionFinale.add(Question(
+                id: incrementQuestion,
+                idQuiz: incrementQuiz,
+                question: strQuestion,
+                option1: listStrPropositions[0],
+                option2: listStrPropositions[1],
+                answer: answer));
+        }
+        incrementQuestion++;
+      }
+      listQuizFinale.add(Quiz(id: incrementQuiz,name: quiz.attributes.first.value.toString()));
+      incrementQuiz++;
+    }
+    print(incrementQuiz);
+    print(incrementQuestion);
   }
 
 
@@ -109,143 +207,4 @@ class _QuizesPageState extends State<EditionQuiz> {
         );
       }
   );
-/*Widget buildNotes() => ListeView.countBuilder(
-    padding: EdgeInsets.all(8),
-    itemCount: notes.length,
-    staggeredTileBuilder: (index) => StaggeredTile.fit(2),
-    crossAxisCount: 4,
-    mainAxisSpacing: 4,
-    crossAxisSpacing: 4,
-    itemBuilder: (context, index) {
-      final note = notes[index];
-      return GestureDetector(
-        onTap: () async {
-          await Navigator.of(context).push(MaterialPageRoute(
-            builder: (context) => NoteDetailPage(noteId: note.id!),
-          ));
-          refreshNotes();
-        },
-        child: NoteCardWidget(note: note, index: index),
-      );
-    },
-  );*/
-
-
-/*floatingActionButton: FloatingActionButton(
-            child: Icon(Icons.save),
-            onPressed: () async {
-              await DatabaseHelper.instance.add(Quiz(name: textController.text),);
-              setState(() {
-                textController.clear();
-              });
-            }
-        ),*/
-//  );
-// }
-//}
-
-/*import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'classObject/quiz.dart';
-class EditionQuiz extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return new PlayEditionQuiz();
-  }
-}
-class PlayEditionQuiz extends State<EditionQuiz> {
-  List<Quiz> list_quizes = List<Quiz>.filled(0,Quiz(0,"test"),growable: true);
-  void _removeQuiz(int index) {
-    setState(() {
-      list_quizes.remove(index);
-    });
-  }
-  void _cancelDeleteQuiz(Quiz item){
-    addNewQuiz(item.name);
-  }
-  void addNewQuiz(String s) {
-    setState(() {
-      list_quizes.add(Quiz(list_quizes.length,s));
-    });
-  }
-  int launchAddFonction(){
-    list_quizes.add(Quiz(1, "test1"));
-    list_quizes.add(Quiz(2, "test2"));
-    list_quizes.add(Quiz(3, "test3"));
-    return list_quizes.length;
-  }
-  Widget build(BuildContext ctx){
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Quizes'),
-      ),
-      body:ListView.builder(
-          itemCount: launchAddFonction(),
-          itemBuilder: (BuildContext context, int index) {
-            final item = list_quizes[index];
-            return Dismissible(
-                key: Key(item.name),
-                background: Container(
-                  child: Icon(
-                    Icons.delete,
-                    size: 40,
-                    color: Colors.white,
-                  ),
-                  color: Colors.cyan,
-                ),
-                onDismissed: (direction) {
-                  _removeQuiz(index);
-                  var snackBar = SnackBar(
-                      content: Text('Suppression du quiz $item'),
-                      action: SnackBarAction(
-                          label: 'Annulation suppression',
-                          onPressed: () {
-                            setState(() {
-                              _cancelDeleteQuiz(item);
-                            });
-                          })
-                  );
-                  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                },
-                child: Card(
-                    child: ListTile(
-                        title: Text(
-                          list_quizes[index].name,
-                          textAlign: TextAlign.center,
-                        ),
-                        onTap: () {
-                          var snackBar =
-                          SnackBar(content: Text('$item'));
-                          ScaffoldMessenger.of(context).showSnackBar(snackBar);
-                        })));
-          }),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showDialog(
-              context: context,
-              barrierDismissible: false,
-              builder: (BuildContext context) {
-                return AlertDialog(
-                  title: Text('Ajouter un grand site'),
-                  content: TextField(
-                      decoration: InputDecoration(
-                          hintText: "Saisissez le nom du grand site"),
-                      onSubmitted: (value) {
-                        setState(() {
-                          addNewQuiz(value);
-                        });
-                        Navigator.of(context).pop();
-                      }),
-                );
-              });
-        },
-        tooltip: 'ajouter un grand site',
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-}*/
-
-
 }
