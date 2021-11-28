@@ -3,7 +3,6 @@ import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
-
 class QuestionDatabase{
   QuestionDatabase._privateConstructor();
   static final QuestionDatabase instance = QuestionDatabase._privateConstructor();
@@ -26,8 +25,6 @@ class QuestionDatabase{
     const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
     const textType = 'TEXT';
 
-
-
     await db.execute('''
     CREATE TABLE $tableQuestions (
   
@@ -40,8 +37,6 @@ class QuestionDatabase{
     ${QuestionFields.answer} $textType,
     ${QuestionFields.idquiz}  ,
     FOREIGN KEY (${QuestionFields.idquiz}) REFERENCES $tableQuizs (${QuizFields.id}) ON DELETE CASCADE
-
-    
     )
     ''');
   }
@@ -88,9 +83,6 @@ class QuestionDatabase{
       columns: QuestionFields.values,
       where: '${QuestionFields.idquiz} = ?',
       whereArgs: [idquiz],
-      // where: '${QuestionFields.idquiz} = $idquiz ',
-      //whereArgs: [idquiz],
-
     );
     if(maps.isNotEmpty){
       return maps.map((json) => Question.fromJson(json)).toList();
