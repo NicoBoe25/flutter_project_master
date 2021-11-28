@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:flutter_project_master/database/questiondatabase.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
@@ -11,12 +12,8 @@ import 'package:flutter_project_master/quizdetail.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 
-
 import 'ajouterquiz.dart';
 import 'classObject/question.dart';
-
-
-
 
 class EditionQuiz extends StatefulWidget {
   const EditionQuiz({Key? key}) : super(key: key);
@@ -141,6 +138,18 @@ class _QuizesPageState extends State<EditionQuiz> {
       }
       listQuizFinale.add(Quiz(id: incrementQuiz,name: quiz.attributes.first.value.toString()));
       incrementQuiz++;
+    }
+    List<Question> listeQuestion = QuestionDatabase.instance.readAllQuestion() as List<Question>;
+    if(listeQuestion.isEmpty){
+      for(Question q in listQuestionFinale){
+        QuestionDatabase.instance.create(q);
+      }
+    }
+    List<Quiz> listeQuiz = QuizDatabase.instance.readAllQuizes() as List<Quiz>;
+    if(listeQuiz.isEmpty) {
+      for (Quiz qu in listQuizFinale) {
+        QuizDatabase.instance.create(qu);
+      }
     }
   }
 
