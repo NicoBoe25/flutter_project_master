@@ -14,10 +14,6 @@ class QuestionFields{
   static const String option4 = 'option4';
   static const String answer = 'answer';
   static const String idquiz = '_idquiz';
-
-
-
-
 }
 
 class Question {
@@ -31,9 +27,6 @@ class Question {
   final int? idquiz;
 
 
-
-
-
   const Question({
     this.id,
     required this.question,
@@ -43,9 +36,6 @@ class Question {
     this.option4,
     required this.answer,
     this.idquiz,
-
-
-
   });
 
   Question copy({
@@ -57,10 +47,6 @@ class Question {
     String? option4,
     String? answer,
     int? idquiz,
-
-
-
-
   }) =>
       Question(
         id: id ?? this.id,
@@ -80,13 +66,10 @@ class Question {
     question: json[QuestionFields.question]as String,
     option1: json[QuestionFields.option1]as String,
     option2: json[QuestionFields.option2]as String,
-    option3: json[QuestionFields.option3]as String,
-    option4: json[QuestionFields.option4]as String,
+    option3: json[QuestionFields.option3] as String? ?? "",
+    option4: json[QuestionFields.option4]as String? ?? "",
     answer: json[QuestionFields.answer]as String,
     idquiz: json[QuestionFields.idquiz] as int?,
-
-
-
   );
 
   Map<String, Object?> toJson() => {
@@ -98,9 +81,5 @@ class Question {
     QuestionFields.option4: option4,
     QuestionFields.answer: answer,
     QuestionFields.idquiz: idquiz,
-
-
-
-
   };
 }
