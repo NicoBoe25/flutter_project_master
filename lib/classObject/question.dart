@@ -1,3 +1,5 @@
+import 'package:flutter_project_master/classObject/quiz.dart';
+
 const String tableQuestions = 'questions';
 
 class QuestionFields{
@@ -57,9 +59,9 @@ class Question {
         option4: option1 ?? this.option4,
         answer: option1 ?? this.answer,
         idquiz: idquiz ?? this.idquiz,
-
-
       );
+
+
 
   static Question fromJson(Map<String, Object?> json) => Question(
     id: json[QuestionFields.id] as int?,
@@ -82,4 +84,32 @@ class Question {
     QuestionFields.answer: answer,
     QuestionFields.idquiz: idquiz,
   };
+
+
+  String toString(){
+    if(option3!.isEmpty){
+      return "id :" + String.fromCharCode(id!) + " \n"+
+          "question :" + question + " \n"+
+          "option1 :" + option1 + " \n"+
+          "option2 :" + option2 + " \n"
+      ;
+    }
+    else if(option3!.isNotEmpty && option4!.isEmpty){
+      return "id :" + String.fromCharCode(id!) + " \n"+
+          "question :" + question + " \n"+
+          "option1 :" + option1 + " \n"+
+          "option2 :" + option2 + " \n"+
+          "option3 :" + option3! + " \n"
+      ;
+    }else{
+      return
+        "id :" + String.fromCharCode(id!) + " \n"+
+            "question :" + question + " \n"+
+            "option1 :" + option1 + " \n"+
+            "option2 :" + option2 + " \n"+
+            "option3 :" + option3! + " \n"+
+            "option4 :" + option4! + " \n"
+    ;
+    }
+  }
 }
