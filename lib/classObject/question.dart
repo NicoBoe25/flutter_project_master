@@ -1,5 +1,4 @@
 final String tableQuestions = 'questions';
-
 class QuestionFields{
   static final List<String> values = [
     /// Add all fields
@@ -19,7 +18,6 @@ class QuestionFields{
 
 
 }
-
 class Question {
   final int? id;
   final String question;
@@ -47,7 +45,6 @@ class Question {
 
 
   });
-
   Question copy({
     int? id,
     String? question,
@@ -88,7 +85,6 @@ class Question {
 
 
   );
-
   Map<String, Object?> toJson() => {
     QuestionFields.id: id,
     QuestionFields.question: question,

@@ -1,59 +1,40 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/questioncard.dart';
-import 'package:flutter_project_master/quizcards.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:intl/intl.dart';
-import 'package:flutter_project_master/database/quizdatabase.dart';
 import 'package:flutter_project_master/database/questiondatabase.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:flutter_project_master/classObject/question.dart';
-import 'package:flutter_project_master/ajouterquiz.dart';
-
 import 'ajouterquestion.dart';
-
-
 class DetailQuiz extends StatefulWidget {
   final int quizId;
-
   const DetailQuiz({
     Key? key,
     required this.quizId,
   }) : super(key: key);
-
   @override
-  _AjouteQuestionPageState createState() => _AjouteQuestionPageState();
+  _AjouteQestionPageState createState() => _AjouteQestionPageState();
 }
-
-class _AjouteQuestionPageState extends State<DetailQuiz> {
+class _AjouteQestionPageState extends State<DetailQuiz> {
   late Quiz quiz;
   late Question question;
   late List<Question> listequestion ;
   bool isLoading = false;
-
   @override
   void initState() {
     super.initState();
-
     refreshQuiz();
   }
   @override
   void dispose() {
     QuestionDatabase.instance.close();
-
     super.dispose();
   }
-
   Future refreshQuiz() async {
     setState(() => isLoading = true);
-
     this.listequestion = await QuestionDatabase.instance.readAllQuestionFromQuizId(widget.quizId);
-
     setState(() => isLoading = false);
   }
-
   @override
-
-
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
         title: Text(
@@ -84,22 +65,6 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
       )
   );
 
-  /* Widget editButton() => IconButton(
-      icon: Icon(Icons.edit_outlined),
-      onPressed: () async {
-        if (isLoading) return;
-        await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => AjouterQuestionPage(quiz: quiz),
-        ));
-        refreshQuiz();
-      });
-  Widget deleteButton() => IconButton(
-    icon: Icon(Icons.delete),
-    onPressed: () async {
-      await QuizDatabase.instance.delete(widget.quizId);
-      Navigator.of(context).pop();
-    },
-  );*/
   Widget buildQuestion() => StaggeredGridView.countBuilder(
       padding: EdgeInsets.all(8),
       itemCount: listequestion.length,
@@ -111,23 +76,25 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
         final questions = listequestion[index];
 
         return GestureDetector(
+            onTap: () async {
+          if (isLoading) return;
 
-          onTap: () async {
-            if (isLoading) return;
+          await Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => AjouterQuestionPage( quizId: widget.quizId! ,question: questions)
+        ));
 
-            await Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => AjouterQuestionPage( quizId: widget.quizId! ,question: questions)
-            ));
+        refreshQuiz();
+      },
+          onDoubleTap: () async {
+            await QuestionDatabase.instance.delete(questions.id!);
 
+            Navigator.of(context).pop();
             refreshQuiz();
-          },
 
+          },
           child: QuestionCardWidget(question: questions, index: index),
 
         );
       }
   );
-
-
-
 }

@@ -6,15 +6,15 @@ import 'package:flutter_project_master/questionswid.dart';
 
 class AjouterQuestionPage extends StatefulWidget {
   final Question? question;
+  final Quiz? quiz;
   final int quizId;
-  //final Quiz? quiz;
 
 
 
   const AjouterQuestionPage({
     Key? key,
     this.question,
-   // this.quiz,
+    this.quiz,
     required this.quizId,
 
 
@@ -22,10 +22,8 @@ class AjouterQuestionPage extends StatefulWidget {
   @override
   _AddEditQuestionPageState createState() => _AddEditQuestionPageState();
 }
-
 class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
   final _formKey = GlobalKey<FormState>();
-
   //late int id;
   late String question;
   late String option1;
@@ -33,7 +31,7 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
   late String option3;
   late String option4;
   late String answer;
- late int idquiz;
+  late int idquiz;
 
 
 
@@ -53,7 +51,6 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
 
 
   }
-
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
@@ -68,8 +65,6 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
         option3: option3,
         option4: option4,
         answer: answer,
-
-
         //onChangedId: (id) => setState(() => this.id = id),
         onChangedQuestion: (question) => setState(() => this.question = question),
         onChangedOption1: (option1) => setState(() => this.option1 = option1),
@@ -77,15 +72,11 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
         onChangedOption3: (option3) => setState(() => this.option3 = option3),
         onChangedOption4: (option4) => setState(() => this.option4 = option4),
         onChangedAnswer: (answer) => setState(() => this.answer = answer),
-
-
       ),
     ),
   );
-
   Widget buildButton() {
     final isFormValid = question.isNotEmpty ;
-
     return Padding(
       padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
       child: ElevatedButton(
@@ -98,33 +89,26 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
       ),
     );
   }
-
   void addOrUpdateQuestion() async {
     final isValid = _formKey.currentState!.validate();
-
     if (isValid) {
       final isUpdating = widget.question != null;
-
       if (isUpdating) {
         await updateQuestion();
       } else {
         await addQuestion();
       }
-
       Navigator.of(context).pop();
     }
   }
-
   Future updateQuestion() async {
     final question1 = widget.question!.copy(
-
         question: question,
         option1: option1,
         option2: option2,
         option3: option3,
         option4: option4,
         answer: answer,
-        //idquiz: widget.quizId
 
 
 

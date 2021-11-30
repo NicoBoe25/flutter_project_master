@@ -1,17 +1,11 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:flutter_project_master/database/quizdatabase.dart';
 import 'package:flutter_project_master/ajouterquiz.dart';
 import 'package:flutter_project_master/quizcards.dart';
-import 'package:flutter_project_master/ajouterquestion.dart';
 import 'package:flutter_project_master/quizdetail.dart';
 
 import 'package:http/http.dart' as http;
@@ -20,12 +14,18 @@ import 'package:xml/xml.dart';
 
 import 'ajouterquiz.dart';
 import 'classObject/question.dart';
-import 'quizwid.dart';
 
 
 
 
 class EditionQuiz extends StatefulWidget {
+  final int? quizId;
+
+  const EditionQuiz({
+    Key? key,
+     this.quizId,
+  }) : super(key: key);
+
   @override
   _QuizesPageState createState() => _QuizesPageState();
 }
@@ -200,6 +200,19 @@ class _QuizesPageState extends State<EditionQuiz> {
             await Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) => DetailQuiz( quizId : quiz.id!)
             ));
+
+            refreshQuizes();
+          },
+          onDoubleTap: () async {
+            await QuizDatabase.instance.delete(quiz.id!);
+
+            Navigator.of(context).pop();
+            refreshQuizes();
+          },
+          onLongPress: () async {
+            await Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => AddQuizPage(quizId : quiz.id! , quiz: quiz)),
+            );
 
             refreshQuizes();
           },
