@@ -2,12 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
 
 final _lightColors = [
-  Colors.amber.shade300,
-  Colors.lightGreen.shade300,
-  Colors.lightBlue.shade300,
-  Colors.orange.shade300,
-  Colors.pinkAccent.shade100,
-  Colors.tealAccent.shade100
+  Colors.lightGreen,
+  Colors.lightBlue,
+  Colors.amberAccent,
+  Colors.deepOrangeAccent,
+  Colors.pinkAccent,
+  Colors.tealAccent,
+  Colors.purpleAccent
+
 ];
 
 class QuizCardWidget extends StatelessWidget {
@@ -23,19 +25,15 @@ class QuizCardWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     /// Pick colors from the accent colors based on index
-    final color = _lightColors[index % _lightColors.length];
-    final minHeight = getMinHeight(index);
+    final color = _lightColors[index];
 
     return Card(
       color: color,
       child: Container(
-        constraints: BoxConstraints(minHeight: minHeight),
-        padding: EdgeInsets.all(8),
+        padding: EdgeInsets.all(10),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            SizedBox(height: 4),
+            SizedBox(height: 10),
             Text(
               quiz.name,
               style: TextStyle(
@@ -51,18 +49,5 @@ class QuizCardWidget extends StatelessWidget {
   }
 
   /// To return different height for different widgets
-  double getMinHeight(int index) {
-    switch (index % 4) {
-      case 0:
-        return 100;
-      case 1:
-        return 150;
-      case 2:
-        return 150;
-      case 3:
-        return 100;
-      default:
-        return 100;
-    }
-  }
+
 }
