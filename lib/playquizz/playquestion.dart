@@ -18,17 +18,23 @@ class LaunchQuizQuestion extends StatefulWidget {
 
 class _QuestionPageState extends State<LaunchQuizQuestion> {
 
-  List<Question> questionList = [];
   int idquiz;
-
-  late Question question;
   Quiz quiz;
+
+  List<Question> questionList = [];
+  late Question question;
+  int idquestion = 0;
   late List<String> propositionList;
 
-  List<Color> listCouleur = [Colors.red, Colors.green, Colors.cyan, Colors.amber];
-  int score = 0;
-  int idquestion = 0;
+  List<Color> listCouleur = [
+    Colors.lightGreen,
+    Colors.lightBlue,
+    Colors.amberAccent,    Colors.pinkAccent,
 
+  ];
+  int score = 0;
+
+  bool isAnwserShown = false;
 
   _QuestionPageState(this.idquiz,this.quiz, this.questionList){
     question = questionList.first;
@@ -36,7 +42,9 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
   }
   void incScore(){
     setState(() {
-      score++;
+      if(!this.isAnwserShown){
+        score++;
+      }
     });
   }
 
@@ -57,6 +65,7 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
   void nextQuestion(){
       setState(() {
         idquestion++;
+        this.isAnwserShown = false;
         if(questionList.length > idquestion) {
           question = questionList.elementAt(idquestion);
           createListeProposition();
@@ -97,6 +106,20 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
                     style: TextStyle(fontSize: 20.0),
                   ),
                 ),
+                Container(
+                  margin: EdgeInsets.all(50),
+                  child: ElevatedButton(
+                    child: Text('Afficher la Reponse', style: TextStyle(fontSize: 20.0),),
+                    onPressed: () {showAnwser(question);},
+                  ),
+                ),
+                Container(
+                  child: Visibility(
+                      visible: isAnwserShown,
+                      child: Text('La reponse est : '+ question.answer,
+                      style: TextStyle(fontSize: 16.0, color: Colors.deepOrangeAccent),)
+                  ),
+                ),
                 SizedBox(
                   height: 250.0,
                   child:  ListView.builder(
@@ -118,6 +141,39 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
           )
         )
       );
+  }
+
+  void showAnwser(Question question) {
+    showDialog(
+      context: context,
+      builder: (context) => StatefulBuilder(builder: (context, setState){
+        return AlertDialog(
+          title: Text('Etes vous sur de voir la réponse?',
+              style: TextStyle(color: Colors.black, fontSize: 20.0)),
+          content:
+                Text(
+                    'Oui pour voir la réponse, sinon appuyer sur Fermer'),
+          actions: <Widget>[
+            ElevatedButton(
+              onPressed: () =>
+                  anwserShown(),
+              child:
+              Text('Oui', style: TextStyle(fontSize: 18.0)),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.pop(context), // this line dismisses the dialog
+              child: Text('Fermer', style: TextStyle(fontSize: 18.0)),
+            )
+          ],
+        );
+      })
+    );
+  }
+
+  anwserShown(){
+    setState(() {
+      isAnwserShown = true;
+    });
   }
 
 }
