@@ -24,7 +24,6 @@ class _NotesPageState extends State<Playquiz> {
   }
   @override
   void dispose() {
-    //QuizDatabase.instance.close();
     super.dispose();
   }
   Future refreshQuizes() async {

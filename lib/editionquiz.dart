@@ -48,8 +48,6 @@ class _QuizesPageState extends State<EditionQuiz> {
 
   @override
   void dispose() {
-    //QuizDatabase.instance.close();
-
     super.dispose();
   }
 
