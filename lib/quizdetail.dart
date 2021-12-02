@@ -33,7 +33,7 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
   }
   @override
   void dispose() {
-    QuestionDatabase.instance.close();
+    //QuestionDatabase.instance.close();
     super.dispose();
   }
 
@@ -67,7 +67,7 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
         child: Icon(Icons.add),
         onPressed: () async {
           await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => AjouterQuestionPage(quizId: widget.quizId!)),
+            MaterialPageRoute(builder: (context) => AjouterQuestionPage(quizId: widget.quizId)),
           );
 
           refreshQuiz();
@@ -90,7 +90,7 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
           if (isLoading) return;
 
           await Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => AjouterQuestionPage( quizId: widget.quizId! ,question: questions)
+              builder: (context) => AjouterQuestionPage( quizId: widget.quizId ,question: questions)
         ));
 
         refreshQuiz();
@@ -100,7 +100,6 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
 
             Navigator.of(context).pop();
             refreshQuiz();
-          },
 
           },
           child: QuestionCardWidget(question: questions, index: index),

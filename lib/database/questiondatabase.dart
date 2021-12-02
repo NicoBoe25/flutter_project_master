@@ -4,16 +4,19 @@ import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
 class QuestionDatabase{
+
   QuestionDatabase._privateConstructor();
+
   static final QuestionDatabase instance = QuestionDatabase._privateConstructor();
   static Database? _database;
   Future<Database> get database async => _database ??= await _initDatabase('questions.db');
+
   Future<Database> _initDatabase(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
     return await openDatabase(
       path,
-      version: 1,
+      version: 2,
       onCreate: _createDB,
     );
   }

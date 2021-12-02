@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:flutter_project_master/database/questiondatabase.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
@@ -47,7 +48,7 @@ class _QuizesPageState extends State<EditionQuiz> {
 
   @override
   void dispose() {
-    QuizDatabase.instance.close();
+    //QuizDatabase.instance.close();
 
     super.dispose();
   }
@@ -147,6 +148,18 @@ class _QuizesPageState extends State<EditionQuiz> {
       }
       listQuizFinale.add(Quiz(id: incrementQuiz,name: quiz.attributes.first.value.toString()));
       incrementQuiz++;
+    }
+    // List<Question> listeQuestion = QuestionDatabase.instance.readAllQuestion() as List<Question>;
+    // if(listeQuestion.isEmpty){
+      for(Question q in listQuestionFinale){
+        QuestionDatabase.instance.create(q);
+      //}
+    }
+    // List<Quiz> listeQuiz = QuizDatabase.instance.readAllQuizes() as List<Quiz>;
+    // if(listeQuiz.isEmpty) {
+      for (Quiz qu in listQuizFinale) {
+        QuizDatabase.instance.create(qu);
+      // }
     }
     print(incrementQuiz);
     print(incrementQuestion);
