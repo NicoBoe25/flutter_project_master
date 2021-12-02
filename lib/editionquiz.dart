@@ -81,7 +81,6 @@ class _QuizesPageState extends State<EditionQuiz> {
     int incrementQuiz = 0;
     String source = Utf8Decoder().convert(reponse.bodyBytes);
     var parse = XmlDocument.parse(source);
-    print("------------------------------------------");
 
     var listQuiz = parse.findAllElements('Quizz');
 
