@@ -117,7 +117,9 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
                   child: Visibility(
                       visible: isAnwserShown,
                       child: Text('La reponse est : '+ question.answer,
-                      style: TextStyle(fontSize: 16.0, color: Colors.deepOrangeAccent),)
+                      style: const TextStyle(fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepOrangeAccent),)
                   ),
                 ),
                 SizedBox(
