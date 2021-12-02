@@ -69,12 +69,10 @@ class _NotesPageState extends State<Playquiz> {
     ),
   );
   Widget buildQuizes() => StaggeredGridView.countBuilder(
-      padding: EdgeInsets.all(8),
+      padding: EdgeInsets.all(10),
       itemCount: quizes.length,
-      staggeredTileBuilder: (index) => StaggeredTile.fit(2),
+      staggeredTileBuilder: (index) => StaggeredTile.fit(4),
       crossAxisCount: 4,
-      mainAxisSpacing: 4,
-      crossAxisSpacing: 4,
       itemBuilder: (context, index) {
         final quiz = quizes[index];
 

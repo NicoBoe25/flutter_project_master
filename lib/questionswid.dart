@@ -109,7 +109,7 @@ class QuestionFormWidget extends StatelessWidget {
                             validator: (title) {
                             if(title != null && title.isEmpty){
                               return "veuillez saisir une answer";}
-                              /*if(title !=  option1.toString().toLowerCase() || title != option2 ||title != option3 || title != option4 )
+                              /*if(title !=  option1.toString().toUpperCase() || title != option2 ||title != option3 || title != option4 )
                               {return "la réponse doit correspondre à une des options";}*/},
                             onChanged: onChangedAnswer,
                           ),
