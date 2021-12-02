@@ -70,8 +70,17 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
     });
   }
 
-  checkAnswer(int index) {
-    print("Proposition Choisie" + index.toString());
+  checkAnswer(int index, String anwserChosen) {
+    String message = "La bonne réponse était : "+question.answer;
+    if(anwserChosen == question.answer){
+      incScore();
+      message = "Vous avez eu la bonne reponse !";
+    }
+
+    var snackBar =
+    SnackBar(content: Text(message));
+    ScaffoldMessenger.of(context).showSnackBar(snackBar);
+
     nextQuestion();
   }
 
@@ -96,7 +105,6 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
         }
       }
   }
-
 
 
   @override
@@ -127,7 +135,7 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
                       style: ElevatedButton.styleFrom(
                           primary: listCouleur.elementAt(index)
                       ),
-                      onPressed: () => checkAnswer(index),
+                      onPressed: () => checkAnswer(index,item),
                     );
                   },
                 ),
