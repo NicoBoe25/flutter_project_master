@@ -1,23 +1,19 @@
-import 'package:flutter_project_master/classObject/quiz.dart';
-
-const String tableQuestions = 'questions';
-
+final String tableQuestions = 'questions';
 class QuestionFields{
   static final List<String> values = [
     /// Add all fields
     id, question, option1 , option2, option3,option4,answer , idquiz
   ];
 
-  static const String id = '_id';
-  static const String question = 'question';
-  static const String option1 = 'option1';
-  static const String option2 = 'option2';
-  static const String option3 = 'option3';
-  static const String option4 = 'option4';
-  static const String answer = 'answer';
-  static const String idquiz = '_idquiz';
+  static final String id = '_id';
+  static final String question = 'question';
+  static final String option1 = 'option1';
+  static final String option2 = 'option2';
+  static final String option3 = 'option3';
+  static final String option4 = 'option4';
+  static final String answer = 'answer';
+  static final String idquiz = '_idquiz';
 }
-
 class Question {
   final int? id;
   final String question;
@@ -61,8 +57,6 @@ class Question {
         idquiz: idquiz ?? this.idquiz,
       );
 
-
-
   static Question fromJson(Map<String, Object?> json) => Question(
     id: json[QuestionFields.id] as int?,
     question: json[QuestionFields.question]as String,
@@ -83,33 +77,6 @@ class Question {
     QuestionFields.option4: option4,
     QuestionFields.answer: answer,
     QuestionFields.idquiz: idquiz,
+
   };
-
-
-  String toString(){
-    if(option3!.isEmpty){
-      return "id :" + String.fromCharCode(id!) + " \n"+
-          "question :" + question + " \n"+
-          "option1 :" + option1 + " \n"+
-          "option2 :" + option2 + " \n"
-      ;
-    }
-    else if(option3!.isNotEmpty && option4!.isEmpty){
-      return "id :" + String.fromCharCode(id!) + " \n"+
-          "question :" + question + " \n"+
-          "option1 :" + option1 + " \n"+
-          "option2 :" + option2 + " \n"+
-          "option3 :" + option3! + " \n"
-      ;
-    }else{
-      return
-        "id :" + String.fromCharCode(id!) + " \n"+
-            "question :" + question + " \n"+
-            "option1 :" + option1 + " \n"+
-            "option2 :" + option2 + " \n"+
-            "option3 :" + option3! + " \n"+
-            "option4 :" + option4! + " \n"
-    ;
-    }
-  }
 }

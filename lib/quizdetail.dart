@@ -29,26 +29,21 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
   @override
   void initState() {
     super.initState();
-
     refreshQuiz();
   }
   @override
   void dispose() {
     QuestionDatabase.instance.close();
-
     super.dispose();
   }
 
   Future refreshQuiz() async {
     setState(() => isLoading = true);
-
-    listequestion = await QuestionDatabase.instance.readAllQuestionFromQuizId(widget.quizId);
-
+    this.listequestion = await QuestionDatabase.instance.readAllQuestionFromQuizId(widget.quizId);
     setState(() => isLoading = false);
   }
 
   @override
-
 
   Widget build(BuildContext context) => Scaffold(
       appBar: AppBar(
@@ -72,7 +67,7 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
         child: Icon(Icons.add),
         onPressed: () async {
           await Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => AjouterQuestionPage(quizId: widget.quizId)),
+            MaterialPageRoute(builder: (context) => AjouterQuestionPage(quizId: widget.quizId!)),
           );
 
           refreshQuiz();
@@ -80,22 +75,6 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
       )
   );
 
-  /* Widget editButton() => IconButton(
-      icon: Icon(Icons.edit_outlined),
-      onPressed: () async {
-        if (isLoading) return;
-        await Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => AjouterQuestionPage(quiz: quiz),
-        ));
-        refreshQuiz();
-      });
-  Widget deleteButton() => IconButton(
-    icon: Icon(Icons.delete),
-    onPressed: () async {
-      await QuizDatabase.instance.delete(widget.quizId);
-      Navigator.of(context).pop();
-    },
-  );*/
   Widget buildQuestion() => StaggeredGridView.countBuilder(
       padding: EdgeInsets.all(8),
       itemCount: listequestion.length,
@@ -107,23 +86,26 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
         final questions = listequestion[index];
 
         return GestureDetector(
+            onTap: () async {
+          if (isLoading) return;
 
-          onTap: () async {
-            if (isLoading) return;
+          await Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => AjouterQuestionPage( quizId: widget.quizId! ,question: questions)
+        ));
 
-            await Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => AjouterQuestionPage( quizId: widget.quizId ,question: questions)
-            ));
+        refreshQuiz();
+      },
+          onDoubleTap: () async {
+            await QuestionDatabase.instance.delete(questions.id!);
 
+            Navigator.of(context).pop();
             refreshQuiz();
           },
 
+          },
           child: QuestionCardWidget(question: questions, index: index),
 
         );
       }
   );
-
-
-
 }

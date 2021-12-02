@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'ajouterquiz.dart';
+import 'package:flutter_project_master/database/quizdatabase.dart';
+import 'package:flutter_project_master/classObject/quiz.dart';
+import 'package:flutter/material.dart';
 
 class QuestionFormWidget extends StatelessWidget {
 
@@ -8,8 +13,6 @@ class QuestionFormWidget extends StatelessWidget {
   final String? option3;
   final String? option4;
   final String? answer;
-
-
   // final ValueChanged<int> onChangedId;
   final ValueChanged<String> onChangedQuestion;
   final ValueChanged<String> onChangedOption1;
@@ -17,7 +20,6 @@ class QuestionFormWidget extends StatelessWidget {
   final ValueChanged<String> onChangedOption3;
   final ValueChanged<String> onChangedOption4;
   final ValueChanged<String> onChangedAnswer;
-
 
   const QuestionFormWidget({
     Key? key,
@@ -36,9 +38,7 @@ class QuestionFormWidget extends StatelessWidget {
     required this.onChangedOption4,
     required this.onChangedAnswer,
 
-
   }) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -110,15 +110,10 @@ class QuestionFormWidget extends StatelessWidget {
                             title != null && title.isEmpty ? 'veuillez saisir une answer ' : null,
                             onChanged: onChangedAnswer,
                           ),
-
                         ])
                 )),
           ]),
     );
-
-
   }
-
-
 
 }

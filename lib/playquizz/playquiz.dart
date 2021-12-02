@@ -12,37 +12,26 @@ class Playquiz extends StatefulWidget {
   @override
   _NotesPageState createState() => _NotesPageState();
 }
-
 class _NotesPageState extends State<Playquiz> {
   final textController = TextEditingController();
-
   late List<Quiz> quizes;
   late Quiz quiz;
   bool isLoading = false;
-
   @override
   void initState() {
     super.initState();
-
     refreshQuizes();
   }
-
   @override
   void dispose() {
     QuizDatabase.instance.close();
-
     super.dispose();
   }
-
   Future refreshQuizes() async {
     setState(() => isLoading = true);
-
     this.quizes = await QuizDatabase.instance.readAllQuizes();
-
     setState(() => isLoading = false);
   }
-
-
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
@@ -61,9 +50,7 @@ class _NotesPageState extends State<Playquiz> {
       )
           : buildQuizes(),
     ),
-
   );
-
   Widget buildQuizes() => StaggeredGridView.countBuilder(
       padding: EdgeInsets.all(8),
       itemCount: quizes.length,

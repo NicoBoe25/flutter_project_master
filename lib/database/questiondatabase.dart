@@ -6,11 +6,8 @@ import 'package:path/path.dart';
 class QuestionDatabase{
   QuestionDatabase._privateConstructor();
   static final QuestionDatabase instance = QuestionDatabase._privateConstructor();
-
   static Database? _database;
-
   Future<Database> get database async => _database ??= await _initDatabase('questions.db');
-
   Future<Database> _initDatabase(String filePath) async {
     final dbPath = await getDatabasesPath();
     final path = join(dbPath, filePath);
@@ -22,8 +19,10 @@ class QuestionDatabase{
   }
 
   Future _createDB(Database db, int version) async {
-    const idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
-    const textType = 'TEXT';
+    final idType = 'INTEGER PRIMARY KEY AUTOINCREMENT';
+    final textType = 'TEXT';
+
+
 
     await db.execute('''
     CREATE TABLE $tableQuestions (
@@ -37,21 +36,17 @@ class QuestionDatabase{
     ${QuestionFields.answer} $textType,
     ${QuestionFields.idquiz}  ,
     FOREIGN KEY (${QuestionFields.idquiz}) REFERENCES $tableQuizs (${QuizFields.id}) ON DELETE CASCADE
+    
     )
     ''');
   }
-
   Future<Question> create(Question question) async {
     final db = await instance.database;
-
     final id = await db.insert(tableQuestions, question.toJson());
-
     return question.copy(id: id);
   }
-
   Future<Question> readQuestion(int idQuestion) async {
     final db = await instance.database;
-
     final maps = await db.query(
       tableQuestions,
       columns: QuestionFields.values,
@@ -65,19 +60,14 @@ class QuestionDatabase{
       throw Exception('ID $idQuestion not found');
     }
   }
-
   Future<List<Question>> readAllQuestion() async {
     final db = await instance.database;
-
     final orderBy = '${QuestionFields.id} ASC';
     final result = await db.query(tableQuestions, orderBy: orderBy);
-
     return result.map((json) => Question.fromJson(json)).toList();
   }
-
   Future<List<Question>> readAllQuestionFromQuizId(int idquiz) async {
     final db = await instance.database;
-
     final maps = await db.query(
       tableQuestions,
       columns: QuestionFields.values,
@@ -94,7 +84,6 @@ class QuestionDatabase{
 
   Future<int> update(Question question) async {
     final db = await instance.database;
-
     return db.update(
         tableQuestions,
         question.toJson(),
@@ -105,7 +94,6 @@ class QuestionDatabase{
 
   Future<int> delete(int id) async {
     final db = await instance.database;
-
     return await db.delete(
         tableQuestions,
         where: '${QuestionFields.id} = ?',

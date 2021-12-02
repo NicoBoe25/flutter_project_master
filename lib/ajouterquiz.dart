@@ -5,10 +5,13 @@ import 'package:flutter_project_master/quizwid.dart';
 
 class AddQuizPage extends StatefulWidget {
   final Quiz? quiz;
+  final int? quizId;
+
 
   const AddQuizPage({
     Key? key,
     this.quiz,
+    this.quizId,
   }) : super(key: key);
   @override
   _AddEditQuizPageState createState() => _AddEditQuizPageState();
