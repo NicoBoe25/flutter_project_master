@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_project_master/classObject/question.dart';
+import 'package:flutter_project_master/database/questiondatabase.dart';
 import 'package:flutter_project_master/playquizz/playquestion.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -17,6 +19,12 @@ class _NotesPageState extends State<Playquiz> {
   late List<Quiz> quizes;
   late Quiz quiz;
   bool isLoading = false;
+
+  //Load For Play
+  late List<Question> listAllQuestion;
+  late List<List<Question>> listOfListQuestions = [[]];
+
+
   @override
   void initState() {
     super.initState();
@@ -26,11 +34,21 @@ class _NotesPageState extends State<Playquiz> {
   void dispose() {
     super.dispose();
   }
+
   Future refreshQuizes() async {
     setState(() => isLoading = true);
     this.quizes = await QuizDatabase.instance.readAllQuizes();
     setState(() => isLoading = false);
+    createListQuestion();
   }
+  createListQuestion(){
+    for(int i=0; i < quizes.length; i++ ){
+      QuestionDatabase.instance.readAllQuestionFromQuizId(i).then((List<Question> value){
+        listOfListQuestions.add(value);
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
@@ -63,7 +81,7 @@ class _NotesPageState extends State<Playquiz> {
         return GestureDetector(
          onTap: () async {
             await Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => LaunchQuizQuestion(quiz.id!)
+                builder: (context) => LaunchQuizQuestion(quiz.id!, listOfListQuestions.elementAt(quiz.id!+1))
             ));
 
             refreshQuizes();

@@ -147,18 +147,21 @@ class _QuizesPageState extends State<EditionQuiz> {
       listQuizFinale.add(Quiz(id: incrementQuiz,name: quiz.attributes.first.value.toString()));
       incrementQuiz++;
     }
-    // List<Question> listeQuestion = QuestionDatabase.instance.readAllQuestion() as List<Question>;
-    // if(listeQuestion.isEmpty){
-      for(Question q in listQuestionFinale){
-        QuestionDatabase.instance.create(q);
-      //}
-    }
-    // List<Quiz> listeQuiz = QuizDatabase.instance.readAllQuizes() as List<Quiz>;
-    // if(listeQuiz.isEmpty) {
+    QuestionDatabase.instance.readAllQuestion().then((List<Question> listeQuestion) {
+      if(listeQuestion.isEmpty || listeQuestion.length > 3){
+        for(Question q in listQuestionFinale){
+          QuestionDatabase.instance.create(q);
+        }
+      }
+    });
+
+    QuizDatabase.instance.readAllQuizes().then((List<Quiz> listeQuiz)
+      { if(listeQuiz.isEmpty || listeQuiz.length > 3){
       for (Quiz qu in listQuizFinale) {
         QuizDatabase.instance.create(qu);
-      // }
-    }
+      }
+    }}
+    );
     print(incrementQuiz);
     print(incrementQuestion);
   }

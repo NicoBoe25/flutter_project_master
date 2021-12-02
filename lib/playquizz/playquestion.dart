@@ -2,72 +2,66 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/classObject/question.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
+import 'package:flutter_project_master/database/questiondatabase.dart';
+import 'package:flutter_project_master/database/quizdatabase.dart';
 
 class LaunchQuizQuestion extends StatefulWidget {
 
   int idquiz;
-  List<Question> listQuestion = [];
-  int idquestion = 0 ;
 
-  LaunchQuizQuestion(this.idquiz){
-    listQuestion = [
-      const Question(
-          question: 'Est ce que ca marche a 2 ?',
-          option1: 'oui',
-          option2: 'non',
-          option3: '',
-          option4: '',
-          answer: 'oui'
-      ),
-      const Question(
-          question: 'Est ce que ca marche a 3 ?',
-          option1: 'oui',
-          option2: 'non',
-          option3: 'peut etre',
-          option4: '',
-          answer: 'peut etre'
-      ),
-      const Question(
-          question: 'Est ce que ca marche a 4 ?',
-          option1: 'oui',
-          option2: 'non',
-          option3: 'peut etre',
-          option4: 'on ne c pas',
-          answer: 'oui')
-    ];
-  }
+  List<Question> questionList;
+
+  LaunchQuizQuestion(this.idquiz,this.questionList){
+    // questionList = [
+    //   const Question(
+    //       question: 'Est ce que ca marche a 2 ?',
+    //       option1: 'oui',
+    //       option2: 'non',
+    //       option3: '',
+    //       option4: '',
+    //       answer: 'oui'
+    //   ),
+    //   const Question(
+    //       question: 'Est ce que ca marche a 3 ?',
+    //       option1: 'oui',
+    //       option2: 'non',
+    //       option3: 'peut etre',
+    //       option4: '',
+    //       answer: 'peut etre'
+    //   ),
+    //   const Question(
+    //       question: 'Est ce que ca marche a 4 ?',
+    //       option1: 'oui',
+    //       option2: 'non',
+    //       option3: 'peut etre',
+    //       option4: 'on ne c pas',
+    //       answer: 'oui')
+    // ];
 
 // try avec bdd -> erreur parse Future<List<Question>> to List<Question>
-  // int quizID;
-  // int idQuestion = 0;
-  //
-  // late Future<List<Question>> questionFutureList;
-  // late List<Question> questionList;
-  // late Question questionToPlay;
-  //
-  // LaunchQuizQuestion(this.quizID){
-  //   questionFutureList = QuestionDatabase.instance.readAllQuestionFromQuizId(quizID);
-  //   questionList = questionFutureList as List<Question>;
-  //   questionToPlay = questionList.first;
-  // }
+  }
 
   @override
-  State<StatefulWidget> createState() => _QuestionPageState(listQuestion);
+  State<StatefulWidget> createState() => _QuestionPageState(idquiz,questionList);
 }
 
 class _QuestionPageState extends State<LaunchQuizQuestion> {
 
-  List<Question> listQuestion;
+  List<Question> questionList = [];
+  int idquiz;
+
   late Question question;
   late Quiz quiz;
   late List<String> propositionList;
+  late String quizName;
 
   List<Color> listCouleur = [Colors.red, Colors.green, Colors.cyan, Colors.amber];
   int score = 0;
   int idquestion = 0;
 
-  _QuestionPageState(this.listQuestion){
-    question = listQuestion.elementAt(idquestion);
+
+  _QuestionPageState(this.idquiz, this.questionList){
+    question = questionList.first;
     createListeProposition();
   }
   void incScore(){
@@ -77,7 +71,6 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
   }
 
   checkAnswer(int index) {
-
     print("Proposition Choisie" + index.toString());
     nextQuestion();
   }
@@ -85,8 +78,8 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
   void nextQuestion(){
       setState(() {
         idquestion++;
-        if(listQuestion.length > idquestion) {
-          question = listQuestion.elementAt(idquestion);
+        if(questionList.length > idquestion) {
+          question = questionList.elementAt(idquestion);
           createListeProposition();
         }
       });
@@ -116,7 +109,7 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
         Column(
             children: <Widget>[
               Container(
-                margin: EdgeInsets.all(150),
+                margin: EdgeInsets.all(50),
                 child: Text(
                   question.question,
                   style: TextStyle(fontSize: 20.0),
@@ -135,7 +128,6 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
                           primary: listCouleur.elementAt(index)
                       ),
                       onPressed: () => checkAnswer(index),
-
                     );
                   },
                 ),
