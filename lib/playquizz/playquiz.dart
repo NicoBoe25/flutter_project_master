@@ -81,7 +81,7 @@ class _NotesPageState extends State<Playquiz> {
         return GestureDetector(
          onTap: () async {
             await Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => LaunchQuizQuestion(quiz.id!, listOfListQuestions.elementAt(quiz.id!+1))
+                builder: (context) => LaunchQuizQuestion(quiz.id!,quiz, listOfListQuestions.elementAt(quiz.id!+1))
             ));
 
             refreshQuizes();

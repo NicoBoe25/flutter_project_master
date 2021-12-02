@@ -11,7 +11,9 @@ class LaunchQuizQuestion extends StatefulWidget {
 
   List<Question> questionList;
 
-  LaunchQuizQuestion(this.idquiz,this.questionList){
+  Quiz quiz;
+
+  LaunchQuizQuestion(this.idquiz,this.quiz,this.questionList){
     // questionList = [
     //   const Question(
     //       question: 'Est ce que ca marche a 2 ?',
@@ -42,7 +44,7 @@ class LaunchQuizQuestion extends StatefulWidget {
   }
 
   @override
-  State<StatefulWidget> createState() => _QuestionPageState(idquiz,questionList);
+  State<StatefulWidget> createState() => _QuestionPageState(idquiz,quiz,questionList);
 }
 
 class _QuestionPageState extends State<LaunchQuizQuestion> {
@@ -51,16 +53,15 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
   int idquiz;
 
   late Question question;
-  late Quiz quiz;
+  Quiz quiz;
   late List<String> propositionList;
-  late String quizName;
 
   List<Color> listCouleur = [Colors.red, Colors.green, Colors.cyan, Colors.amber];
   int score = 0;
   int idquestion = 0;
 
 
-  _QuestionPageState(this.idquiz, this.questionList){
+  _QuestionPageState(this.idquiz,this.quiz, this.questionList){
     question = questionList.first;
     createListeProposition();
   }
@@ -111,7 +112,7 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(/*quiz.name*/ "Blabla"),
+          title: Text(quiz.name),
         ),
         body: Center(child:
         Column(
