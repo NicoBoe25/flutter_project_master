@@ -114,17 +114,16 @@ class _QuizesPageState extends State<EditionQuiz> {
         switch(nbReponse){
           case 3:
             listQuestionFinale.add(Question(
-                    id: incrementQuestion,
                     idquiz: incrementQuiz,
                     question: strQuestion,
                     option1: listStrPropositions[0],
                     option2: listStrPropositions[1],
                     option3: listStrPropositions[2],
+                    option4: '',
                     answer: answer));
             break;
           case 4:
             listQuestionFinale.add(Question(
-                id: incrementQuestion,
                 idquiz: incrementQuiz,
                 question: strQuestion,
                 option1: listStrPropositions[0],
@@ -135,11 +134,12 @@ class _QuizesPageState extends State<EditionQuiz> {
             break;
           default:
             listQuestionFinale.add(Question(
-                id: incrementQuestion,
                 idquiz: incrementQuiz,
                 question: strQuestion,
                 option1: listStrPropositions[0],
                 option2: listStrPropositions[1],
+                option3: '',
+                option4: '',
                 answer: answer));
         }
         incrementQuestion++;
