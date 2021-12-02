@@ -24,12 +24,21 @@ class QuizFormWidget extends StatelessWidget {
                     Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Spacer(flex: 2), //2/6
+                          Spacer(), //2/6
                           Text(
-                            "Let's creat a Quiz,",
+                            "Let's creat a Quiz",
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                          Spacer(), // 1/6
-                          Text("Enter a name for the  quiz "),
+                          Spacer(flex: 1), // 1/6
+                          Text("Enter a name for the  quiz ",style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                          ),),
                           Spacer(), // 1/6
                           TextFormField(
                             decoration: InputDecoration(
@@ -42,6 +51,7 @@ class QuizFormWidget extends StatelessWidget {
                             name != null && name.isEmpty ? 'veuillez saisir un nom de quiz ' : null,
                             onChanged: onChangedName,
                           ),
+                          Spacer(flex: 2),
 
                         ])
                 )),
