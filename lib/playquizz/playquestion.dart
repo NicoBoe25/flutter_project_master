@@ -2,46 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/classObject/question.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
-import 'package:flutter_project_master/database/questiondatabase.dart';
-import 'package:flutter_project_master/database/quizdatabase.dart';
+import 'package:flutter_project_master/playquizz/showscore.dart';
 
 class LaunchQuizQuestion extends StatefulWidget {
 
   int idquiz;
-
   List<Question> questionList;
-
   Quiz quiz;
 
-  LaunchQuizQuestion(this.idquiz,this.quiz,this.questionList){
-    // questionList = [
-    //   const Question(
-    //       question: 'Est ce que ca marche a 2 ?',
-    //       option1: 'oui',
-    //       option2: 'non',
-    //       option3: '',
-    //       option4: '',
-    //       answer: 'oui'
-    //   ),
-    //   const Question(
-    //       question: 'Est ce que ca marche a 3 ?',
-    //       option1: 'oui',
-    //       option2: 'non',
-    //       option3: 'peut etre',
-    //       option4: '',
-    //       answer: 'peut etre'
-    //   ),
-    //   const Question(
-    //       question: 'Est ce que ca marche a 4 ?',
-    //       option1: 'oui',
-    //       option2: 'non',
-    //       option3: 'peut etre',
-    //       option4: 'on ne c pas',
-    //       answer: 'oui')
-    // ];
-
-// try avec bdd -> erreur parse Future<List<Question>> to List<Question>
-  }
+  LaunchQuizQuestion(this.idquiz,this.quiz,this.questionList);
 
   @override
   State<StatefulWidget> createState() => _QuestionPageState(idquiz,quiz,questionList);
@@ -91,6 +60,10 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
         if(questionList.length > idquestion) {
           question = questionList.elementAt(idquestion);
           createListeProposition();
+        }else{
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => ShowScore(quiz, score))
+          );
         }
       });
   }
@@ -111,42 +84,40 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          title: Text(quiz.name),
-        ),
-        body: Center(child:
-        Column(
-            children: <Widget>[
-              Container(
-                margin: EdgeInsets.all(50),
-                child: Text(
-                  question.question,
-                  style: TextStyle(fontSize: 20.0),
+          appBar: AppBar(
+            title: Text(quiz.name),
+          ),
+          body: Center(child:
+          Column(
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.all(50),
+                  child: Text(
+                    question.question,
+                    style: TextStyle(fontSize: 20.0),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: 250.0,
-                child:  ListView.builder(
-                  itemCount: propositionList.length,
-                  itemBuilder: (BuildContext context, int index){
-                    final item = propositionList[index];
-                    return ElevatedButton(
-                      key: Key(item),
-                      child: Text(item),
-                      style: ElevatedButton.styleFrom(
-                          primary: listCouleur.elementAt(index)
-                      ),
-                      onPressed: () => checkAnswer(index,item),
-                    );
-                  },
-                ),
-              )
-          ]
+                SizedBox(
+                  height: 250.0,
+                  child:  ListView.builder(
+                    itemCount: propositionList.length,
+                    itemBuilder: (BuildContext context, int index){
+                      final item = propositionList[index];
+                      return ElevatedButton(
+                        key: Key(item),
+                        child: Text(item),
+                        style: ElevatedButton.styleFrom(
+                            primary: listCouleur.elementAt(index)
+                        ),
+                        onPressed: () => checkAnswer(index,item),
+                      );
+                    },
+                  ),
+                )
+              ]
+          )
         )
-      )
-    );
+      );
   }
-
-
 
 }
