@@ -94,7 +94,6 @@ class MyQuizs extends StatefulWidget {
         switch(nbReponse){
           case 3:
             listQuestionFinale.add(Question(
-                idquiz: incrementQuiz,
                 question: strQuestion,
                 option1: listStrPropositions[0],
                 option2: listStrPropositions[1],
@@ -104,7 +103,6 @@ class MyQuizs extends StatefulWidget {
             break;
           case 4:
             listQuestionFinale.add(Question(
-                idquiz: incrementQuiz,
                 question: strQuestion,
                 option1: listStrPropositions[0],
                 option2: listStrPropositions[1],
@@ -114,7 +112,6 @@ class MyQuizs extends StatefulWidget {
             break;
           default:
             listQuestionFinale.add(Question(
-                idquiz: incrementQuiz,
                 question: strQuestion,
                 option1: listStrPropositions[0],
                 option2: listStrPropositions[1],
@@ -124,7 +121,7 @@ class MyQuizs extends StatefulWidget {
         }
         incrementQuestion++;
       }
-      listQuizFinale.add(Quiz(id: incrementQuiz,name: quiz.attributes.first.value.toString()));
+      listQuizFinale.add(Quiz(name: quiz.attributes.first.value.toString()));
       incrementQuiz++;
     }
     //Ajout dans les bases de données
