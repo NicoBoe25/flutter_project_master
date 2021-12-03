@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter_project_master/classObject/question.dart';
 
-final _lightColors = [
+final _CardsColors = [
   Colors.lightGreen,
   Colors.lightBlue,
   Colors.amberAccent,
@@ -24,8 +23,7 @@ class QuestionCardWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Pick colors from the accent colors based on index
-    final color = _lightColors[index];
+    final color = _CardsColors[index];
 
     return Card(
       color: color,
@@ -47,7 +45,5 @@ class QuestionCardWidget extends StatelessWidget {
       ),
     );
   }
-
-  /// To return different height for different widgets
 
 }

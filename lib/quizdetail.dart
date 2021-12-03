@@ -4,7 +4,6 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_project_master/database/questiondatabase.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:flutter_project_master/classObject/question.dart';
-
 import 'ajouterquestion.dart';
 
 
@@ -33,7 +32,6 @@ class _AjouteQuestionPageState extends State<DetailQuiz> {
   }
   @override
   void dispose() {
-    //QuestionDatabase.instance.close();
     super.dispose();
   }
 

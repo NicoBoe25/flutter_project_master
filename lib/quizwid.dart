@@ -4,13 +4,11 @@ import 'package:flutter/cupertino.dart';
 
 class QuizFormWidget extends StatelessWidget {
   final String? name;
-  // final ValueChanged<int> onChangedId;
   final ValueChanged<String> onChangedName;
 
   const QuizFormWidget({
     Key? key,
     this.name = '',
-    //required this.onChangedId,
     required this.onChangedName,
   }) : super(key: key);
 
@@ -26,7 +24,7 @@ class QuizFormWidget extends StatelessWidget {
                         children: [
                           Spacer(), //2/6
                           Text(
-                            "Let's creat a Quiz",
+                            "créer Quiz",
                             style: TextStyle(
                               color: Colors.black,
                               fontSize: 20,
@@ -34,7 +32,7 @@ class QuizFormWidget extends StatelessWidget {
                             ),
                           ),
                           Spacer(flex: 1), // 1/6
-                          Text("Enter a name for the  quiz ",style: TextStyle(
+                          Text("le nom du quiz : ",style: TextStyle(
                             color: Colors.black,
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
@@ -42,7 +40,7 @@ class QuizFormWidget extends StatelessWidget {
                           Spacer(), // 1/6
                           TextFormField(
                             decoration: InputDecoration(
-                              hintText: "Quiz Name",
+                              hintText: "Quiz Nom",
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(12)),
                               ),

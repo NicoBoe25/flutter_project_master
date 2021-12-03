@@ -18,7 +18,6 @@ class MyQuiz extends StatelessWidget {
 class MyQuizs extends StatefulWidget {
   @override
   _AllMyQuizs createState() {
-    //initBaseDiDonne();
     return _AllMyQuizs();
 
   }

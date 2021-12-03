@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'ajouterquiz.dart';
-import 'package:flutter_project_master/database/quizdatabase.dart';
-import 'package:flutter_project_master/classObject/question.dart';
-import 'package:flutter/material.dart';
+
 
 class QuestionFormWidget extends StatelessWidget {
   final String question;
@@ -12,7 +8,7 @@ class QuestionFormWidget extends StatelessWidget {
   final String option3;
   final String option4;
   final String answer;
-  // final ValueChanged<int> onChangedId;
+
   final ValueChanged<String> onChangedQuestion;
   final ValueChanged<String> onChangedOption1;
   final ValueChanged<String> onChangedOption2;
@@ -29,7 +25,6 @@ class QuestionFormWidget extends StatelessWidget {
     this.option4 = '',
     this.answer = '',
 
-    //required this.onChangedId,
     required this.onChangedQuestion,
     required this.onChangedOption1,
     required this.onChangedOption2,
@@ -128,8 +123,3 @@ class QuestionFormWidget extends StatelessWidget {
   }
 
   }
-
-
-
-
-//question1!.question.toString() != null ? question1!.question : "Question"
