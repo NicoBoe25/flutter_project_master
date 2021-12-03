@@ -14,17 +14,17 @@ class QuestionFields{
   static final String idquiz = '_idquiz';
 }
 class Question {
-  final int? id;
+  int? id;
   final String question;
   final String option1;
   final String option2;
   final String? option3;
   final String? option4;
   final String answer;
-  final int? idquiz;
+  int? idquiz;
 
 
-  const Question({
+  Question({
     this.id,
     required this.question,
     required this.option1,

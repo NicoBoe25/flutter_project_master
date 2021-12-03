@@ -55,8 +55,8 @@ class _NotesPageState extends State<Playquiz> {
    * Permet de donner la liste des questions à jouer pour playquestion
    */
   createListQuestion(){
-    for(int i=0; i < quizes.length; i++ ){
-      QuestionDatabase.instance.readAllQuestionFromQuizId(i).then((List<Question> value){
+    for(Quiz q in this.quizes){
+      QuestionDatabase.instance.readAllQuestionFromQuizId(q.id!).then((List<Question> value){
         listOfListQuestions.add(value);
       });
     }
@@ -66,7 +66,7 @@ class _NotesPageState extends State<Playquiz> {
   Widget build(BuildContext context) => Scaffold(
     appBar: AppBar(
       title: Text(
-        'Quizes',
+        'Quizeur',
         style: TextStyle(fontSize: 24),
       ),
     ),

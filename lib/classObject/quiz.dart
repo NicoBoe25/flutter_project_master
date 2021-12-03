@@ -13,9 +13,9 @@ class QuizFields {
 
 
 class Quiz {
-  final int? id;
+  int? id;
   final String name;
-  const Quiz({
+  Quiz({
     this.id,
     required this.name
   });
