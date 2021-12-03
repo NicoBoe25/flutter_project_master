@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
 
-final _cardsColors = [
+final _cardsColors = [//une liste des colors varieés por les grids
   Colors.lightGreen,
   Colors.lightBlue,
   Colors.amberAccent,
@@ -15,7 +15,7 @@ final _cardsColors = [
 class QuizCardWidget extends StatelessWidget {
   QuizCardWidget({
     Key? key,
-    required this.quiz,
+    required this.quiz,// on prend le quiz quon ajoute ou modifie comme clé
     required this.index,
   }) : super(key: key);
 
@@ -34,7 +34,7 @@ class QuizCardWidget extends StatelessWidget {
           children: [
             SizedBox(height: 10),
             Text(
-              quiz.name,
+              quiz.name,//on voir que le nom du quiz sur la carte
               style: TextStyle(
                 color: Colors.black,
                 fontSize: 20,

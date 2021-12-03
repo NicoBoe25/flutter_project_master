@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 
 
-class QuizFormWidget extends StatelessWidget {
+class QuizFormWidget extends StatelessWidget {//on modifie le nom d'un quiz
   final String? name;
-  final ValueChanged<String> onChangedName;
+  final ValueChanged<String> onChangedName;//pour prendre en compte le nouveau nom du quiz
 
   const QuizFormWidget({
     Key? key,
     this.name = '',
-    required this.onChangedName,
+    required this.onChangedName,//ces obligatoir de les prendre en paramétre quand on fait appel à cette class est c'est pour prendre les valeurs en compte sinon les valeurs seront pas enregistrés
   }) : super(key: key);
 
   @override
@@ -45,7 +45,7 @@ class QuizFormWidget extends StatelessWidget {
                                 borderRadius: BorderRadius.all(Radius.circular(12)),
                               ),
                             ),
-                            validator: (name) =>
+                            validator: (name) =>//verification que le nom n'est pas vide
                             name != null && name.isEmpty ? 'veuillez saisir un nom de quiz ' : null,
                             onChanged: onChangedName,
                           ),

@@ -6,7 +6,7 @@ import 'classObject/question.dart';
 import 'classObject/quiz.dart';
 import 'database/questiondatabase.dart';
 import 'database/quizdatabase.dart';
-import 'editionquiz.dart';
+import 'AjouteEtModif/editionquiz.dart';
 
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
@@ -155,7 +155,7 @@ class _AllMyQuizs extends State<MyQuizs> {
               child: Container(
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/backg.png"),
+                    image: AssetImage("assets/backg.jpg"),
                     fit: BoxFit.cover,
                   ),
                 ),
