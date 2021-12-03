@@ -7,7 +7,7 @@ import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_project_master/classObject/quiz.dart';
 import 'package:flutter_project_master/database/quizdatabase.dart';
-import 'package:flutter_project_master/quizcards.dart';
+import 'package:flutter_project_master/designCards/quizcards.dart';
 
 
 class Playquiz extends StatefulWidget {
