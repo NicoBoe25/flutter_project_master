@@ -2,7 +2,6 @@ const String tableQuizs = 'quizes';
 
 class QuizFields {
   static final List<String> values = [
-    /// Add all fields
     id, name
   ];
 

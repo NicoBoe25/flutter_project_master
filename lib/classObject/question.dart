@@ -1,7 +1,6 @@
 final String tableQuestions = 'questions';
 class QuestionFields{
   static final List<String> values = [
-    /// Add all fields
     id, question, option1 , option2, option3,option4,answer , idquiz
   ];
 

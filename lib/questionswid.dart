@@ -1,19 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/material.dart';
-import 'ajouterquiz.dart';
-import 'package:flutter_project_master/database/quizdatabase.dart';
-import 'package:flutter_project_master/classObject/quiz.dart';
-import 'package:flutter/material.dart';
+
 
 class QuestionFormWidget extends StatelessWidget {
+  final String question;
+  final String option1;
+  final String option2;
+  final String option3;
+  final String option4;
+  final String answer;
 
-  final String? question;
-  final String? option1;
-  final String? option2;
-  final String? option3;
-  final String? option4;
-  final String? answer;
-  // final ValueChanged<int> onChangedId;
   final ValueChanged<String> onChangedQuestion;
   final ValueChanged<String> onChangedOption1;
   final ValueChanged<String> onChangedOption2;
@@ -30,7 +25,6 @@ class QuestionFormWidget extends StatelessWidget {
     this.option4 = '',
     this.answer = '',
 
-    //required this.onChangedId,
     required this.onChangedQuestion,
     required this.onChangedOption1,
     required this.onChangedOption2,
@@ -52,7 +46,7 @@ class QuestionFormWidget extends StatelessWidget {
                         children: [
                           TextFormField(
                             decoration: InputDecoration(
-                              hintText: "Question",
+                              hintText: "Question" ,
                               border: OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(12)),
                               ),
@@ -128,4 +122,4 @@ class QuestionFormWidget extends StatelessWidget {
     );
   }
 
-}
+  }

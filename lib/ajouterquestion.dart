@@ -24,7 +24,7 @@ class AjouterQuestionPage extends StatefulWidget {
 }
 class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
   final _formKey = GlobalKey<FormState>();
-  //late int id;
+
   late String question;
   late String option1;
   late String option2;
@@ -39,7 +39,7 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
   @override
   void initState() {
     super.initState();
-    //  id = widget.quiz?.id ?? 0;
+
     question = widget.question?.question ?? '';
     option1 = widget.question?.option1 ?? '';
     option2 = widget.question?.option2 ?? '';
@@ -65,7 +65,7 @@ class _AddEditQuestionPageState extends State<AjouterQuestionPage> {
         option3: option3,
         option4: option4,
         answer: answer,
-        //onChangedId: (id) => setState(() => this.id = id),
+
         onChangedQuestion: (question) => setState(() => this.question = question),
         onChangedOption1: (option1) => setState(() => this.option1 = option1),
         onChangedOption2: (option2) => setState(() => this.option2 = option2),

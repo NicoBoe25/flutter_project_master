@@ -44,7 +44,6 @@ class _AddEditQuizPageState extends State<AddQuizPage> {
       key: _formKey,
       child: QuizFormWidget(
         name: name,
-        //onChangedId: (id) => setState(() => this.id = id),
         onChangedName: (name) => setState(() => this.name = name),
       ),
     ),
