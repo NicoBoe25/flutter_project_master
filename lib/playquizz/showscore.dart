@@ -14,7 +14,12 @@ class ShowScore extends StatefulWidget {
   ScorePageState createState() => ScorePageState(quiz,score);
 }
 
-
+/**
+ * Page de score
+ * Affiche le nom du quiz et le score
+ * Pas de navigation en arrière
+ * Bouton retour main page
+ */
 class ScorePageState extends State<ShowScore>{
 
   int score;

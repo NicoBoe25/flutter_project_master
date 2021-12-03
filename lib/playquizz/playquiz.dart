@@ -14,6 +14,10 @@ class Playquiz extends StatefulWidget {
   @override
   _NotesPageState createState() => _NotesPageState();
 }
+
+/**
+ * Page pour afficher une liste de quiz et jouer
+ */
 class _NotesPageState extends State<Playquiz> {
   final textController = TextEditingController();
   late List<Quiz> quizes;
@@ -35,12 +39,21 @@ class _NotesPageState extends State<Playquiz> {
     super.dispose();
   }
 
+  /**
+   * Charge les quiz à afficher
+   * Puis dans un second temps charge les questions
+   */
   Future refreshQuizes() async {
     setState(() => isLoading = true);
     this.quizes = await QuizDatabase.instance.readAllQuizes();
     setState(() => isLoading = false);
     createListQuestion();
   }
+
+  /**
+   * Créer une liste de listes de questions
+   * Permet de donner la liste des questions à jouer pour playquestion
+   */
   createListQuestion(){
     for(int i=0; i < quizes.length; i++ ){
       QuestionDatabase.instance.readAllQuestionFromQuizId(i).then((List<Question> value){

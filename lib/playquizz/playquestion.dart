@@ -40,6 +40,10 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
     question = questionList.first;
     createListeProposition();
   }
+
+  /**
+   * Augmente le score si la reponse n'a pas été vu
+   */
   void incScore(){
     setState(() {
       if(!this.isAnwserShown){
@@ -48,6 +52,15 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
     });
   }
 
+  /**
+   * Vérifie que la réponse choisie est la réponse à la question
+   * Si la réponse est bonne :
+   * |  -Produit une snackbar de félicitation
+   * |  -Incrémente le score
+   * Sinon :
+   * |  -Donne la réponse dans la snackbar
+   * Puis passe à la question suivante
+   */
   checkAnswer(int index, String anwserChosen) {
     String message = "La bonne réponse était : "+question.answer;
     if(anwserChosen == question.answer){
@@ -62,6 +75,10 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
     nextQuestion();
   }
 
+  /**
+   * Passe à la question suivante et ces propositions
+   * Si la liste est finie, lance la page de score
+   */
   void nextQuestion(){
       setState(() {
         idquestion++;
@@ -77,6 +94,9 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
       });
   }
 
+  /**
+   * Crée la liste de propositions à la question
+   */
   createListeProposition(){
       propositionList = [];
       propositionList.add(question.option1);
@@ -89,6 +109,48 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
       }
   }
 
+
+  /**
+   * Lance une fenêtre de dialogue pour afficher la réponse
+   * Si on ferme, rien ne se passe
+   * Sinon on affiche la valeur sur la page de la question
+   */
+  void showAnwser(Question question) {
+    showDialog(
+        context: context,
+        builder: (context) => StatefulBuilder(builder: (context, setState){
+          return AlertDialog(
+            title: Text('Etes vous sur de voir la réponse?',
+                style: TextStyle(color: Colors.black, fontSize: 20.0)),
+            content:
+            Text(
+                'Oui pour voir la réponse, sinon appuyer sur Fermer'),
+            actions: <Widget>[
+              ElevatedButton(
+                onPressed: () =>
+                    anwserShown(),
+                child:
+                Text('Oui', style: TextStyle(fontSize: 18.0)),
+              ),
+              ElevatedButton(
+                onPressed: () => Navigator.pop(context), // this line dismisses the dialog
+                child: Text('Fermer', style: TextStyle(fontSize: 18.0)),
+              )
+            ],
+          );
+        })
+    );
+  }
+
+  /**
+   * Change la valeur de isAnwserShown pour afficher la réponse
+   * La visibility du 3ème container est changée, le texte apparait
+   */
+  anwserShown(){
+    setState(() {
+      isAnwserShown = true;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -145,37 +207,5 @@ class _QuestionPageState extends State<LaunchQuizQuestion> {
       );
   }
 
-  void showAnwser(Question question) {
-    showDialog(
-      context: context,
-      builder: (context) => StatefulBuilder(builder: (context, setState){
-        return AlertDialog(
-          title: Text('Etes vous sur de voir la réponse?',
-              style: TextStyle(color: Colors.black, fontSize: 20.0)),
-          content:
-                Text(
-                    'Oui pour voir la réponse, sinon appuyer sur Fermer'),
-          actions: <Widget>[
-            ElevatedButton(
-              onPressed: () =>
-                  anwserShown(),
-              child:
-              Text('Oui', style: TextStyle(fontSize: 18.0)),
-            ),
-            ElevatedButton(
-              onPressed: () => Navigator.pop(context), // this line dismisses the dialog
-              child: Text('Fermer', style: TextStyle(fontSize: 18.0)),
-            )
-          ],
-        );
-      })
-    );
-  }
-
-  anwserShown(){
-    setState(() {
-      isAnwserShown = true;
-    });
-  }
 
 }
